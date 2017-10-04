@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b First name:
+  = @technician.first_name
+%p
+  %b Last name:
+  = @technician.last_name
+%p
+  %b Is active:
+  = @technician.is_active
+
+= link_to 'Edit', edit_technician_path(@technician)
+\|
+= link_to 'Back', technicians_path

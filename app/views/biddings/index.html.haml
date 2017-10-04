@@ -1,0 +1,23 @@
+%h1 Listing biddings
+
+%table
+  %thead
+    %tr
+      %th Job
+      %th Contractor service
+      %th
+      %th
+      %th
+
+  %tbody
+    - @biddings.each do |bidding|
+      %tr
+        %td= bidding.job
+        %td= bidding.contractor_service
+        %td= link_to 'Show', bidding
+        %td= link_to 'Edit', edit_bidding_path(bidding)
+        %td= link_to 'Destroy', bidding, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Bidding', new_bidding_path

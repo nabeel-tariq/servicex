@@ -1,0 +1,25 @@
+%h1 Listing technicians
+
+%table
+  %thead
+    %tr
+      %th First name
+      %th Last name
+      %th Is active
+      %th
+      %th
+      %th
+
+  %tbody
+    - @technicians.each do |technician|
+      %tr
+        %td= technician.first_name
+        %td= technician.last_name
+        %td= technician.is_active
+        %td= link_to 'Show', technician
+        %td= link_to 'Edit', edit_technician_path(technician)
+        %td= link_to 'Destroy', technician, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Technician', new_technician_path

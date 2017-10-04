@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Contractor:
+  = @order.contractor
+%p
+  %b Job:
+  = @order.job
+%p
+  %b Bidding:
+  = @order.bidding
+%p
+  %b Status:
+  = @order.status_id
+
+= link_to 'Edit', edit_order_path(@order)
+\|
+= link_to 'Back', orders_path

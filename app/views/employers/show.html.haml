@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b First name:
+  = @employer.first_name
+%p
+  %b Last name:
+  = @employer.last_name
+%p
+  %b Is active:
+  = @employer.is_active
+
+= link_to 'Edit', edit_employer_path(@employer)
+\|
+= link_to 'Back', employers_path
