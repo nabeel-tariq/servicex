@@ -10,4 +10,6 @@ class Employer < ApplicationRecord
   accepts_nested_attributes_for :contact_numbers
   accepts_nested_attributes_for :location
   accepts_nested_attributes_for :attachments
+
+  validates_presence_of :first_name, :last_name
 end

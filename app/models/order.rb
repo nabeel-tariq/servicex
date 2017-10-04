@@ -7,4 +7,5 @@ class Order < ApplicationRecord
   belongs_to :job
   belongs_to :bidding
 
+  validates_presence_of :contractor_id, :job_id, :bidding_id
 end
