@@ -1,7 +1,10 @@
 class LocationContractorService < ApplicationRecord
   belongs_to :contractor_service
-  belongs_to :location
 
-  validates_presence_of :contractor_service_id, :location_id
-  validates_uniqueness_of :contractor_service_id, :scope => :location_id
+  has_one :location, as: :locationable, dependent: :destroy
+
+  validates_presence_of :contractor_service_id
+  validates_uniqueness_of :contractor_service_id
+
+  accepts_nested_attributes_for :location
 end

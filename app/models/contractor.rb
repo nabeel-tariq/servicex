@@ -3,7 +3,8 @@ class Contractor < ApplicationRecord
   has_many :attachments, as: :attachable, dependent: :destroy
   has_many :contractor_services, dependent: :destroy
   has_many :services, through: :contractor_services
-  has_many  :orders, dependent: :destroy
+
+  has_and_belongs_to_many :biddings
 
   has_one :location, as: :locationable, dependent: :destroy
   has_one :user, as: :profileable, dependent: :destroy

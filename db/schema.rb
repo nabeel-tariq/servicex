@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171004152252) do
+ActiveRecord::Schema.define(version: 20171007101248) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,16 +21,36 @@ ActiveRecord::Schema.define(version: 20171004152252) do
     t.integer  "attachable_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.integer  "status"
+    t.string   "image_type"
     t.index ["attachable_type", "attachable_id"], name: "index_attachments_on_attachable_type_and_attachable_id", using: :btree
   end
 
   create_table "biddings", force: :cascade do |t|
     t.integer  "job_id"
-    t.integer  "contractor_service_id"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-    t.index ["contractor_service_id"], name: "index_biddings_on_contractor_service_id", using: :btree
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "description"
+    t.integer  "status"
+    t.integer  "amount"
+    t.datetime "time"
     t.index ["job_id"], name: "index_biddings_on_job_id", using: :btree
+  end
+
+  create_table "biddings_contractors", id: false, force: :cascade do |t|
+    t.integer "bidding_id"
+    t.integer "contractor_id"
+    t.index ["bidding_id", "contractor_id"], name: "index_biddings_contractors_on_bidding_id_and_contractor_id", using: :btree
+    t.index ["bidding_id"], name: "index_biddings_contractors_on_bidding_id", using: :btree
+    t.index ["contractor_id"], name: "index_biddings_contractors_on_contractor_id", using: :btree
+  end
+
+  create_table "cities", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "state_id"
+    t.index ["state_id"], name: "index_cities_on_state_id", using: :btree
   end
 
   create_table "contact_numbers", force: :cascade do |t|
@@ -39,13 +59,17 @@ ActiveRecord::Schema.define(version: 20171004152252) do
     t.integer  "contactable_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.integer  "number_type"
+    t.integer  "status"
+    t.string   "otp"
+    t.datetime "otp_sent_at"
     t.index ["contactable_type", "contactable_id"], name: "index_contact_numbers_on_contactable_type_and_contactable_id", using: :btree
   end
 
   create_table "contractor_services", force: :cascade do |t|
     t.integer  "contractor_id"
     t.integer  "service_id"
-    t.integer  "status_id"
+    t.integer  "status"
     t.string   "status_changed_at"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
@@ -58,8 +82,9 @@ ActiveRecord::Schema.define(version: 20171004152252) do
     t.string   "last_name"
     t.string   "shop_name"
     t.boolean  "is_active"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "contractor_type"
   end
 
   create_table "employers", force: :cascade do |t|
@@ -73,21 +98,30 @@ ActiveRecord::Schema.define(version: 20171004152252) do
   create_table "jobs", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
-    t.integer  "status_id"
+    t.integer  "status"
     t.integer  "employer_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "budget"
+    t.datetime "time"
     t.index ["employer_id"], name: "index_jobs_on_employer_id", using: :btree
+  end
+
+  create_table "jobs_services", force: :cascade do |t|
+    t.integer  "job_id"
+    t.integer  "service_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_id"], name: "index_jobs_services_on_job_id", using: :btree
+    t.index ["service_id"], name: "index_jobs_services_on_service_id", using: :btree
   end
 
   create_table "location_contractor_services", force: :cascade do |t|
     t.integer  "contractor_service_id"
-    t.integer  "location_id"
     t.boolean  "is_enable"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
     t.index ["contractor_service_id"], name: "index_location_contractor_services_on_contractor_service_id", using: :btree
-    t.index ["location_id"], name: "index_location_contractor_services_on_location_id", using: :btree
   end
 
   create_table "locations", force: :cascade do |t|
@@ -98,24 +132,32 @@ ActiveRecord::Schema.define(version: 20171004152252) do
     t.integer  "locationable_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.string   "address_1"
+    t.string   "address_2"
+    t.string   "zip_code"
+    t.integer  "city_id"
+    t.integer  "state_id"
+    t.index ["city_id"], name: "index_locations_on_city_id", using: :btree
     t.index ["locationable_type", "locationable_id"], name: "index_locations_on_locationable_type_and_locationable_id", using: :btree
+    t.index ["state_id"], name: "index_locations_on_state_id", using: :btree
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer  "contractor_id"
     t.integer  "job_id"
     t.integer  "bidding_id"
-    t.integer  "status_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.integer  "status"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "amount"
+    t.text     "remarks"
+    t.datetime "ending_date"
     t.index ["bidding_id"], name: "index_orders_on_bidding_id", using: :btree
-    t.index ["contractor_id"], name: "index_orders_on_contractor_id", using: :btree
     t.index ["job_id"], name: "index_orders_on_job_id", using: :btree
   end
 
   create_table "payments", force: :cascade do |t|
     t.integer  "order_id"
-    t.integer  "status_id"
+    t.integer  "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["order_id"], name: "index_payments_on_order_id", using: :btree
@@ -133,7 +175,14 @@ ActiveRecord::Schema.define(version: 20171004152252) do
     t.integer  "service_category_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.integer  "service_type"
     t.index ["service_category_id"], name: "index_services_on_service_category_id", using: :btree
+  end
+
+  create_table "states", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tech_talks", force: :cascade do |t|
@@ -170,15 +219,17 @@ ActiveRecord::Schema.define(version: 20171004152252) do
     t.index ["profileable_type", "profileable_id"], name: "index_users_on_profileable_type_and_profileable_id", using: :btree
   end
 
-  add_foreign_key "biddings", "contractor_services"
   add_foreign_key "biddings", "jobs"
+  add_foreign_key "cities", "states"
   add_foreign_key "contractor_services", "contractors"
   add_foreign_key "contractor_services", "services"
   add_foreign_key "jobs", "employers"
+  add_foreign_key "jobs_services", "jobs"
+  add_foreign_key "jobs_services", "services"
   add_foreign_key "location_contractor_services", "contractor_services"
-  add_foreign_key "location_contractor_services", "locations"
+  add_foreign_key "locations", "cities"
+  add_foreign_key "locations", "states"
   add_foreign_key "orders", "biddings"
-  add_foreign_key "orders", "contractors"
   add_foreign_key "orders", "jobs"
   add_foreign_key "payments", "orders"
   add_foreign_key "services", "service_categories"
