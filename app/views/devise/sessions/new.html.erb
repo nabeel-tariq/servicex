@@ -1,44 +1,5 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end -%>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
-
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="page">
-      <div id="breadcrumb-section" class="section">
-        <div class="container">
-          <div class="page-title text-center">
-            <h1>User Login</h1>
-            <ol class="breadcrumb">
-              <li><a href="#">Home</a></li>
-              <li class="active">Signin</li>
-            </ol>
-          </div>
-        </div>
-      </div><!-- breadcrumb-section -->
-
       <div class="ad-post-wrapper section">
         <div class="container">
           <div class="row">
@@ -49,10 +10,15 @@
                     <%= f.email_field :email, autofocus: true , :class => 'form-control', :required => true, placeholder: "Email"%>
                   </div>
                   <div class="form-group">
-                    <% if @minimum_password_length %>
-                        <em>(<%= @minimum_password_length %> characters minimum)</em>
-                    <% end %><br />
                     <%= f.password_field :password, autocomplete: "off", :class => 'form-control' , :required => true, placeholder: "Password"%>
+                  </div>
+                  <div class="form-group">
+                    <% if devise_mapping.rememberable? -%>
+                      <div class="field">
+                        <%= f.check_box :remember_me %>
+                        <%= f.label :remember_me %>
+                      </div>
+                    <% end -%>
                   </div>
                   <%= f.submit "Log In" , :class => 'btn btn-primary'%>
                 </form>
@@ -60,6 +26,6 @@
             </div>
           </div>
         </div>
-      </div> <!-- ad-post -->
-    </div>	<!-- page -->
+      </div>
+    </div>
 <% end %>

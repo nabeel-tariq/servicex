@@ -185,13 +185,6 @@ ActiveRecord::Schema.define(version: 20171016200347) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "tech_talks", force: :cascade do |t|
-    t.integer  "test_id_id"
-    t.integer  "tech_talk_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-  end
-
   create_table "technician_orders", force: :cascade do |t|
     t.integer  "technician_id"
     t.integer  "order_id"
