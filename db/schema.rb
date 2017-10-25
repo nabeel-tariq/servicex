@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171016200347) do
+ActiveRecord::Schema.define(version: 20171023153024) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -185,6 +185,13 @@ ActiveRecord::Schema.define(version: 20171016200347) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "tech_talks", force: :cascade do |t|
+    t.integer  "test_id_id"
+    t.integer  "tech_talk_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "technician_orders", force: :cascade do |t|
     t.integer  "technician_id"
     t.integer  "order_id"
@@ -219,6 +226,7 @@ ActiveRecord::Schema.define(version: 20171016200347) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
+    t.integer  "account_stage",          default: 0
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["profileable_type", "profileable_id"], name: "index_users_on_profileable_type_and_profileable_id", using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree

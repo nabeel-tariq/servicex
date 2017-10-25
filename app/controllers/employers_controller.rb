@@ -39,7 +39,7 @@ class EmployersController < ApplicationController
 
   # PATCH/PUT /employers/1
   # PATCH/PUT /employers/1.json
-  def update
+  def updates
     respond_to do |format|
       if @employer.update(employer_params)
         format.html { redirect_to @employer, notice: 'Employer was successfully updated.' }

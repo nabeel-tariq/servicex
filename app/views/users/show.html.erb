@@ -1,0 +1,5 @@
+<% if @user.incomplete? %>
+    <%= render "partials/complete_information_form", locals: { user: @user }%>
+<% else %>
+<% end %>
+<%= link_to 'Edit', edit_user_path(@user) %>|<%= link_to 'Back', users_path %>
