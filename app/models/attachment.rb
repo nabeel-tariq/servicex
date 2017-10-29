@@ -1,7 +1,6 @@
 class Attachment < ApplicationRecord
   belongs_to :attachable, polymorphic: true
   validates_presence_of :name, :image_type
-
   has_attached_file :document,default_url: "#{APP_URL}/missing.png",preserve_files: true, :styles => lambda { |a| a.instance.is_image? ? {medium: '300x300>', thumb: '100x100>'} : {} },
                     :url => "#{APP_URL}/system/:class/:attachment/:image_type/:hash/:filename",
                     :path => lambda { |a| ":rails_root/public/system/:class/:attachment/:image_type/:hash/:filename" },
@@ -12,6 +11,6 @@ class Attachment < ApplicationRecord
 
   def is_image?
     #document.instance.attachment_content_type =~ %r(image)
-    return true
+    return false
   end
 end

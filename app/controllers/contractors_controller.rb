@@ -69,6 +69,6 @@ class ContractorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contractor_params
-      params.require(:contractor).permit(:first_name, :last_name, :shop_name, :is_active, contact_numbers_attributes: [ :id, :text_value ], location_attributes: [:id, :name, :address_1, :address_2, :zip_code, :city_id, contact_numbers_attributes: [ :id, :text_value ]])
+      params.require(:contractor).permit(:first_name, :last_name, :shop_name, :is_active, contact_numbers_attributes: [ :id, :text_value ], location_attributes: [:id, :name, :address_1, :address_2, :zip_code, :city_id, contact_numbers_attributes: [ :id, :text_value ]], attachments_attributes: [:id, :name, :image_type, :document])
     end
 end

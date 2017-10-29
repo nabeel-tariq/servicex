@@ -62,20 +62,22 @@
                     </div>
                   </div><!-- post-inner -->
                 </div>
-                    <div class="col-md-6">
-                      <div class="post-inner">
-                        <div class="row form-group">
-                          <label class="col-md-4">Photo: </label>
-                          <div class="col-md-8">
-                            <div class="upload-section">
-                              <label class="upload-image" for="uploadOne">
-                                <%= image_tag profile.attachments.last.document.url %>
-                              </label>
-                            </div>
-                          </div>
+                <% if profile.attachments.last.id %>
+                <div class="col-md-6">
+                  <div class="post-inner">
+                    <div class="row form-group">
+                      <label class="col-md-4">Photo: </label>
+                      <div class="col-md-8">
+                        <div class="upload-section">
+                          <label class="upload-image" for="uploadOne">
+                            <%= image_tag profile.attachments.last.document.url %>
+                          </label>
                         </div>
-                      </div><!-- post-inner -->
+                      </div>
                     </div>
+                  </div><!-- post-inner -->
+                </div>
+                <% end %>
                 <% end %>
               </div>
               <div class="row">
