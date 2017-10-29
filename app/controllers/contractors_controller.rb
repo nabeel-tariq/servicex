@@ -1,4 +1,5 @@
 class ContractorsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_contractor, only: [:show, :edit, :update, :destroy]
 
   # GET /contractors

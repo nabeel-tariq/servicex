@@ -1,6 +1,7 @@
 class EmployersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_employer, only: [:show, :edit, :update, :destroy]
-
+  #helper_method :call_in_view
   # GET /employers
   # GET /employers.json
   def index
