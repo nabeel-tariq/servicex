@@ -1,0 +1,5 @@
+<% if current_user.incomplete? %>
+    <%= render "partials/complete_information_form", locals: { user: @contractor }%>
+<% else %>
+    This is nabeel
+<% end %>

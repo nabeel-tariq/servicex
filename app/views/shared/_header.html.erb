@@ -1,4 +1,7 @@
-<header class="clearfix" id="header">
+<% if current_user %>
+<% path = (current_user.profileable_type == 'Employer') ? edit_employer_path(current_user.profileable_id) : edit_contractor_path(current_user.profileable_id)%>
+<% end %>
+    <header class="clearfix" id="header">
   <nav class="navbar navbar-default">
     <div class="topbar">
       <div class="container">
@@ -54,7 +57,7 @@
                       </a>
                       <ul class="dropdown-menu">
                         <li>
-                          <%= link_to('Profile', user_path(current_user.id), :style=>'color:black;') %>
+                          <%= link_to('Profile', path, :style=>'color:black;') %>
                         </li>
                         <li>
                           <%= link_to('Sign Out', destroy_user_session_path, method: :delete, :style=>'color:black;') %>

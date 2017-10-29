@@ -42,7 +42,7 @@ class ContractorsController < ApplicationController
   def update
     respond_to do |format|
       if @contractor.update(contractor_params)
-        format.html { redirect_to @contractor, notice: 'Contractor was successfully updated.' }
+        format.html { redirect_to root_path, notice: 'Contractor was successfully updated.' }
         format.json { render :show, status: :ok, location: @contractor }
       else
         format.html { render :edit }
@@ -69,6 +69,6 @@ class ContractorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contractor_params
-      params.require(:contractor).permit(:first_name, :last_name, :shop_name, :is_active)
+      params.require(:contractor).permit(:first_name, :last_name, :shop_name, :is_active, contact_numbers_attributes: [ :id, :text_value ], location_attributes: [:id, :name, :address_1, :address_2, :zip_code, :city_id, contact_numbers_attributes: [ :id, :text_value ]])
     end
 end

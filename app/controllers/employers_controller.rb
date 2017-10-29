@@ -39,10 +39,11 @@ class EmployersController < ApplicationController
 
   # PATCH/PUT /employers/1
   # PATCH/PUT /employers/1.json
-  def updates
+  def update
     respond_to do |format|
-      if @employer.update(employer_params)
-        format.html { redirect_to @employer, notice: 'Employer was successfully updated.' }
+      if @employer.update!(employer_params)
+        #@employer.user.complete!
+        format.html { redirect_to root_path, notice: 'Employer was successfully updated.' }
         format.json { render :show, status: :ok, location: @employer }
       else
         format.html { render :edit }
@@ -69,6 +70,6 @@ class EmployersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def employer_params
-      params.require(:employer).permit(:first_name, :last_name, :is_active)
+      params.require(:employer).permit(:id, :first_name, :last_name, :is_active, contact_numbers_attributes: [ :id, :text_value ], location_attributes: [:id, :name, :address_1, :address_2, :zip_code, :city_id, contact_numbers_attributes: [ :id, :text_value ]], attachments_attributes: [:id, :name, :image_type, :document])
     end
 end
