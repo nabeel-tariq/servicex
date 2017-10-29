@@ -42,6 +42,7 @@ class ContractorsController < ApplicationController
   def update
     respond_to do |format|
       if @contractor.update(contractor_params)
+        @contractor.user.complete!
         format.html { redirect_to root_path, notice: 'Contractor was successfully updated.' }
         format.json { render :show, status: :ok, location: @contractor }
       else
