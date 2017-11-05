@@ -7,6 +7,6 @@ class User < ApplicationRecord
   enum account_stage: {incomplete: 0, complete: 1}
 
   def full_name
-    "#{self.first_name} #{self.first_name}".titleize
+    "#{self.profileable.first_name} #{self.profileable.last_name}".titleize
   end
 end

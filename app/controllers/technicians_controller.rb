@@ -69,6 +69,6 @@ class TechniciansController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def technician_params
-      params.require(:technician).permit(:first_name, :last_name, :is_active)
+      params.require(:technician).permit(:id, :first_name, :last_name, :contractor_id,:is_active, contact_numbers_attributes: [ :id, :text_value ], location_attributes: [:id, :name, :address_1, :address_2, :zip_code, :city_id, :longitude, :latitude], attachments_attributes: [:id, :name, :image_type, :document])
     end
 end

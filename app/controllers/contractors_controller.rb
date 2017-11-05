@@ -44,7 +44,7 @@ class ContractorsController < ApplicationController
     respond_to do |format|
       if @contractor.update(contractor_params)
         @contractor.user.complete!
-        format.html { redirect_to root_path, notice: 'Contractor was successfully updated.' }
+        format.html { redirect_to edit_contractor_path, notice: 'Contractor was successfully updated.' }
         format.json { render :show, status: :ok, location: @contractor }
       else
         format.html { render :edit }
@@ -67,10 +67,11 @@ class ContractorsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_contractor
       @contractor = Contractor.find(params[:id])
+      @technician = Technician.new
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contractor_params
-      params.require(:contractor).permit(:first_name, :last_name, :shop_name, :is_active, contact_numbers_attributes: [ :id, :text_value ], location_attributes: [:id, :name, :address_1, :address_2, :zip_code, :city_id, contact_numbers_attributes: [ :id, :text_value ]], attachments_attributes: [:id, :name, :image_type, :document])
+      params.require(:contractor).permit(:first_name, :last_name, :shop_name, :is_active, contact_numbers_attributes: [ :id, :text_value ], location_attributes: [:id, :name, :address_1, :address_2, :zip_code, :city_id, :longitude, :latitude, contact_numbers_attributes: [ :id, :text_value ]], attachments_attributes: [:id, :name, :image_type, :document])
     end
 end

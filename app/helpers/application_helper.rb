@@ -20,7 +20,6 @@ module ApplicationHelper
   end
   
   def setup_profileable_model(profile_model)
-    #TODO move to controller
     profile_model.contact_numbers.length > 0 ? profile_model.contact_numbers : profile_model.contact_numbers.build
     profile_model.location ||= Location.new
     (profile_model.location && profile_model.location.contact_numbers.length > 0) ? profile_model.location.contact_numbers : profile_model.location.contact_numbers.build

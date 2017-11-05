@@ -1,5 +1,50 @@
-<% if current_user.incomplete? %>
-    <%= render "partials/complete_information_form", locals: { user: @employer }%>
-<% else %>
-    This is nabeel
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card" style="margin-top: 10% !important;">
+        <div class="col-sm-12" style="padding-left: 0px !important;">
+          <div class="col-sm-5">
+                <a href="#"><%= image_tag @employer.latest_image, class: "img-circle" %></a>
+          </div>
+          <div class="col-sm-7 pull-left">
+            <ul>
+              <li>
+                <span>
+                  <i class="fa fa-user"></i>
+                </span>
+                <a href="#"><%= @employer.full_name %></a>
+              </li>
+              <li>
+                <span>
+                  <i class="fa fa-envelope-o"></i>
+                </span>
+                <a href="#"><%= @employer.user.email %></a>
+              </li>
+              <li>
+                <span>
+                  <i class="fa fa-phone"></i>
+                </span>
+                <a href="#"><%= @employer.user.account_stage %></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <ul class="nav nav-tabs nav-tab nav-justified" id="myTab">
+          <li class="active"><a class="tab-btn" href="#profile" data-toggle="tab">Profile</a></li>
+          <li><a class="tab-btn" href="#services" data-toggle="tab">Active Jobs</a></li>
+        </ul>
+
+        <div class="tab-content">
+          <div class="tab-pane fade in active" id="profile">
+            <%= render "partials/complete_information_form", locals: { user: @employer }%>
+          </div>
+          <div class="tab-pane fade" id="services">
+            <%= render "partials/contractor_services_form", locals: { user: @employer }%>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

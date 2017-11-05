@@ -6,7 +6,7 @@ class RegistrationsController < Devise::RegistrationsController
   def create
     build_resource(sign_up_params)
     child_class = resource.profileable_type.camelize.constantize if resource.profileable_type == 'employer' || resource.profileable_type == 'contractor'
-    resource.profileable = child_class.new
+    resource.profileable = child_class.new(first_name: resource.first_name, last_name: resource.last_name)
     valid = resource.valid?
     valid = resource.profileable.valid? && valid
 

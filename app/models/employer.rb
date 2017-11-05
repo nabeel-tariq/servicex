@@ -16,4 +16,12 @@ class Employer < ApplicationRecord
   def update_profile_stage
     self.user.complete!
   end
+
+  def latest_image
+    attachments.present? ? attachments.last.document.url(:thumb) : "#{APP_URL}/images/missing.png"
+  end
+
+  def full_name
+    "#{self.first_name} #{self.last_name}".titleize
+  end
 end

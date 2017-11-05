@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171029050117) do
+ActiveRecord::Schema.define(version: 20171103192519) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -202,8 +202,10 @@ ActiveRecord::Schema.define(version: 20171029050117) do
     t.string   "first_name"
     t.string   "last_name"
     t.boolean  "is_active"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "contractor_id"
+    t.index ["contractor_id"], name: "index_technicians_on_contractor_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -245,4 +247,5 @@ ActiveRecord::Schema.define(version: 20171029050117) do
   add_foreign_key "services", "service_categories"
   add_foreign_key "technician_orders", "orders"
   add_foreign_key "technician_orders", "technicians"
+  add_foreign_key "technicians", "contractors"
 end

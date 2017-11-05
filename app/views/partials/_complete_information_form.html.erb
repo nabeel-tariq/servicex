@@ -1,7 +1,7 @@
 <% profile= @employer ||= @contractor %>
-<div class="avt-post-wrapper section">
+<div class="avt-post-wrapper">
 <div class="container">
-  <div class="avt-post">
+  <div class="avt-post col-sm-12">
     <%= form_for setup_profileable_model(profile) do |f| %>
       <fieldset>
         <div class="product-section avtpost-fields">
@@ -30,115 +30,100 @@
               </div>
             </div>
             </div>
-            <%= f.fields_for :contact_numbers do |contact_fields| %>
             <div class="row">
-              <div class="col-md-6">
-                <div class="post-inner">
-                  <div class="row form-group">
-                    <label class="col-md-4">Cell No: </label>
-                    <div class="col-md-8">
-                      <%= contact_fields.text_field :text_value, autofocus: true , :class => 'form-control', :required => true, value: @employer.contact_numbers.first.text_value %>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <% end %>
-            <div class="row">
-            <%= f.fields_for :attachments do |attachment| %>
-            <%= attachment.hidden_field :image_type, value: 'Profile Pic'%>
-            <%= attachment.hidden_field :name, value: 'Testing' %>
-            <div class="col-md-6">
-              <div class="post-inner">
-                <div class="row form-group">
-                  <label class="col-md-4">Upload Photo: </label>
-                  <div class="col-md-8">
-                    <div class="upload-section">
-                      <label class="upload-image" for="uploadOne">
-                        <%= attachment.file_field :document %>
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <% if profile.attachments.last.id %>
-            <div class="col-md-6">
-              <div class="post-inner">
-                <div class="row form-group">
-                  <label class="col-md-4">Photo: </label>
-                  <div class="col-md-8">
-                    <div class="upload-section">
-                      <label class="upload-image" for="uploadOne">
-                        <%= image_tag profile.attachments.last.document.url(:small) %>
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <% end %>
-            <% end %>
-          </div>
-          <div class="row">
-          <%= f.fields_for :location do |location_fields| %>
+              <%= f.fields_for :contact_numbers do |contact_fields| %>
+
                 <div class="col-md-6">
                   <div class="post-inner">
                     <div class="row form-group">
-                      <label class="col-md-4">Location Name</label>
+                      <label class="col-md-4">Cell No: </label>
                       <div class="col-md-8">
-                        <%= location_fields.text_field :name, autofocus: true , :class => 'form-control', :required => true %>
-                        <%#= location_fields.hidden_field :city_id, :value => 2 %>
+                        <%= contact_fields.text_field :text_value, autofocus: true , :class => 'form-control', :required => true, value: @employer.contact_numbers.first.text_value %>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="col-md-6">
-                  <div class="post-inner">
-                    <div class="row form-group">
-                      <label class="col-md-4">Address 1</label>
-                      <div class="col-md-8">
-                        <%= location_fields.text_field :address_1, autofocus: true , :class => 'form-control', :required => true %>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="post-inner">
-                    <div class="row form-group">
-                      <label class="col-md-4">Address 2</label>
-                      <div class="col-md-8">
-                        <%= location_fields.text_field :address_2, autofocus: true , :class => 'form-control', :required => true %>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="post-inner">
-                    <div class="row form-group">
-                      <label class="col-md-4">Zip Code</label>
-                      <div class="col-md-8">
-                        <%= location_fields.text_field :zip_code, autofocus: true , :class => 'form-control', :required => true %>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <%= location_fields.fields_for :contact_numbers do |location_contact_numbers_fields| %>
-                    <div class="col-md-6">
-                      <div class="post-inner">
-                        <div class="row form-group">
-                          <label class="col-md-4">Contact No</label>
-                          <div class="col-md-8">
-                            <%= location_contact_numbers_fields.text_field :text_value, autofocus: true , :class => 'form-control', :required => true %>
+              <% end %>
+              <%= f.fields_for :attachments do |attachment| %>
+                  <%= attachment.hidden_field :image_type, value: 'Profile Pic'%>
+                  <%= attachment.hidden_field :name, value: 'Testing' %>
+                  <div class="col-md-6">
+                    <div class="post-inner">
+                      <div class="row form-group">
+                        <label class="col-md-4">Upload Photo: </label>
+                        <div class="col-md-8">
+                          <div class="upload-section">
+                            <label class="upload-image" for="uploadOne">
+                              <%= attachment.file_field :document %>
+                            </label>
                           </div>
                         </div>
                       </div>
                     </div>
-                <% end %>
-          <% end %>
-          </div>
+                  </div>
+              <% end %>
+            </div>
+            <div class="row">
+            <%= f.fields_for :location do |location_fields| %>
+                  <div class="col-md-6">
+                    <div class="post-inner">
+                      <div class="row form-group">
+                        <label class="col-md-4">Location Name</label>
+                        <div class="col-md-8">
+                          <%= location_fields.text_field :name, autofocus: true , :class => 'form-control', :required => true, id: 'searchTextField' %>
+                          <%= location_fields.hidden_field :city_id, :value => 1 %>
+                          <%= location_fields.hidden_field :latitude, :value => '' %>
+                          <%= location_fields.hidden_field :longitude, :value => '' %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="post-inner">
+                      <div class="row form-group">
+                        <label class="col-md-4">Address 1</label>
+                        <div class="col-md-8">
+                          <%= location_fields.text_field :address_1, autofocus: true , :class => 'form-control', :required => true %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="post-inner">
+                      <div class="row form-group">
+                        <label class="col-md-4">Address 2</label>
+                        <div class="col-md-8">
+                          <%= location_fields.text_field :address_2, autofocus: true , :class => 'form-control', :required => true %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="post-inner">
+                      <div class="row form-group">
+                        <label class="col-md-4">Zip Code</label>
+                        <div class="col-md-8">
+                          <%= location_fields.text_field :zip_code, autofocus: true , :class => 'form-control', :required => true %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <%= location_fields.fields_for :contact_numbers do |location_contact_numbers_fields| %>
+                      <div class="col-md-6">
+                        <div class="post-inner">
+                          <div class="row form-group">
+                            <label class="col-md-4">Contact No</label>
+                            <div class="col-md-8">
+                              <%= location_contact_numbers_fields.text_field :text_value, autofocus: true , :class => 'form-control', :required => true %>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  <% end %>
+            <% end %>
+            </div>
         </div>
-        <div class="submit-section">
+        <div class="submit-section text-center">
           <div class="submit-button">
             <%= f.submit "Save" , :class => 'btn btn-primary'%>
           </div>
