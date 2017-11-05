@@ -4,7 +4,6 @@ $(document).ready(function() {
 });
 
 function show_hide_technician_form(){
-    google.maps.event.addDomListener(window, 'load', initialize);
     $("#technician_listing").hide();
     $("#technician_form").show();
 }
