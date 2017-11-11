@@ -44,7 +44,7 @@ class EmployersController < ApplicationController
     respond_to do |format|
       if @employer.update!(employer_params)
         @employer.user.complete!
-        format.html { redirect_to root_path, notice: 'Employer was successfully updated.' }
+        format.html { redirect_to edit_employer_path, notice: 'Employer was successfully updated.' }
         format.json { render :show, status: :ok, location: @employer }
       else
         format.html { render :edit }

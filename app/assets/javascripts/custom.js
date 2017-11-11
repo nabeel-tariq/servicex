@@ -40,14 +40,14 @@ jQuery(function ($) {
         var $myCarousel = $('#home-section'),
             $firstAnimatingElems = $myCarousel.find('.item:first').find("[data-animation ^= 'animated']");
             
-        //Initialize carousel 
-        $myCarousel.carousel();
-        
-        //Animate captions in first slide on page load 
-        doAnimations($firstAnimatingElems);
-        
-        //Pause carousel  
-        $myCarousel.carousel('pause');
+        //Initialize carousel
+        // $myCarousel.carousel();
+        //
+        // //Animate captions in first slide on page load
+        // doAnimations($firstAnimatingElems);
+        //
+        // //Pause carousel
+        // $myCarousel.carousel('pause');
         
         //Other slides to be animated on carousel slide event 
         $myCarousel.on('slide.bs.carousel', function (e) {

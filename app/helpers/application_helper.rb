@@ -26,4 +26,11 @@ module ApplicationHelper
     profile_model.attachments.length > 0 ? profile_model.attachments : profile_model.attachments.build
     profile_model
   end
+
+  private
+  def build_nested profile_model
+    profile_model.contractor_services.first.location_contractor_services.build
+    profile_model.contractor_services.first.location_contractor_services.first.location ||= Location.new
+    profile_model
+  end
 end

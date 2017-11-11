@@ -1,3 +1,6 @@
+<% content_for :javascript_includes do %>
+    <%= javascript_include_tag "technician" %>
+<% end %>
 <% profile = Technician.new %>
 <div class="avt-post-wrapper">
   <div class="container">
@@ -115,7 +118,7 @@
                           <div class="row form-group">
                             <label class="col-md-4">Location Name</label>
                             <div class="col-md-8">
-                              <%= location_fields.text_field :name, autofocus: true , :class => 'form-control', :required => true, id: 'searchTextField' %>
+                              <%= location_fields.text_field :name, autofocus: true , :class => 'form-control', :required => true, id: 'searchTextField2' %>
                               <%= location_fields.hidden_field :city_id, :value => 1 %>
                               <%= location_fields.hidden_field :latitude, :value => '' %>
                               <%= location_fields.hidden_field :longitude, :value => '' %>

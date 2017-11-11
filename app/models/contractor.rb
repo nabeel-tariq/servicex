@@ -14,7 +14,7 @@ class Contractor < ApplicationRecord
   accepts_nested_attributes_for :contact_numbers
   accepts_nested_attributes_for :location
   accepts_nested_attributes_for :attachments
-
+  accepts_nested_attributes_for :contractor_services
   #validates_presence_of :first_name, :last_name, :shop_name
 
   def latest_image
@@ -23,5 +23,10 @@ class Contractor < ApplicationRecord
 
   def full_name
     "#{self.first_name} #{self.last_name}".titleize
+  end
+
+  def initialize_nested
+    self.contractor_services.build
+    self.contractor_services.map &:initialize_nested
   end
 end

@@ -1,4 +1,4 @@
-class ContractorsController < ApplicationController
+class ContractorServicesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_contractor, only: [:show, :edit, :update, :destroy]
 
@@ -42,10 +42,10 @@ class ContractorsController < ApplicationController
   # PATCH/PUT /contractors/1
   # PATCH/PUT /contractors/1.json
   def update
-    debugger
     respond_to do |format|
       if @contractor.update(contractor_params)
-        @contractor.user.complete!
+        @contractor.locations.build
+        format.js { render "update" }
         format.html { redirect_to edit_contractor_path, notice: 'Contractor was successfully updated.' }
         format.json { render :show, status: :ok, location: @contractor }
       else
@@ -68,17 +68,11 @@ class ContractorsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_contractor
-      @contractor = Contractor.find(params[:id])
-      @technician = Technician.new
+      @contractor = ContractorService.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contractor_params
-      params.require(:contractor).permit(:first_name, :last_name, :shop_name, :is_active,
-                                         contact_numbers_attributes: [ :id, :text_value ],
-                                         location_attributes: [:id, :name, :address_1, :address_2, :zip_code, :city_id, :longitude, :latitude,
-                                         contact_numbers_attributes: [ :id, :text_value ]],
-                                         attachments_attributes: [:id, :name, :image_type, :document],
-                                         contractor_services_attributes: [:id, :contractor_id, :service_id, locations_attributes: [:id, :name, :address_1, :address_2, :zip_code, :city_id, :longitude, :latitude ]])
+      params.require(:contractor_service).permit(:id,locations_attributes: [:name,:latitude,:longitude,:id])
     end
 end
