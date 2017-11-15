@@ -27,6 +27,11 @@ module ApplicationHelper
     profile_model
   end
 
+  def setup_job_model job
+    job.initialize_nested_attri
+
+  end
+
   private
   def build_nested profile_model
     profile_model.contractor_services.first.location_contractor_services.build
