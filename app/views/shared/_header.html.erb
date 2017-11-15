@@ -17,10 +17,11 @@
                 </span>
                 +012 345 6790
               </li>
+              <% unless user_signed_in? %>
               <li>
                 <ul class="list-inline top-social">
                   <li>
-                    <a class="facebook" href="#">
+                    <a class="facebook" href="/users/auth/facebook">
                       <i class="fa fa-facebook"></i>
                     </a>
                   </li>
@@ -41,6 +42,7 @@
                   </li>
                 </ul>
               </li>
+              <% end %>
             </ul>
           </div>
           <% if user_signed_in? %>
@@ -49,8 +51,10 @@
                   <ul class="list-line">
                     <li class="dropdown">
                       <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">
-                        Welcome <%= current_user.full_name %>
-                        <span class="caret"></span>
+                        <%if current_user %>
+                            Welcome <%= current_user.full_name %>
+                            <span class="caret"></span>
+                        <% end %>
                       </a>
                       <ul class="dropdown-menu">
                         <li>
