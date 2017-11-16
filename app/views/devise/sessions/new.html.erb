@@ -5,6 +5,13 @@
           <div class="row">
             <div class="col-md-4 col-md-offset-4">
               <div class="user-form">
+                <div class="_xvm _29o8 pb-lg" id="u_0_1"><div class="_5h0c _5h0d" style="" role="button" tabindex="0"><table class="uiGrid _51mz _5h0i _xvp _5f0n" cellspacing="0" cellpadding="0"><tbody><tr class="_51mx"><td class="_51m-"><div class="_5h0j">
+                  <span class="_5h0k">
+                    <i class="fa fa-facebook fa-2x bg-white"></i>
+                  </span></div></td><td class="_51m-"><div class="_5h0q"><div class="_5h0o pl">
+                  <%=link_to "Login With Facebook",user_facebook_omniauth_authorize_path,class: "text-white"%>
+                </div></div></td><td class="_51m- _51mw"><div class="_4cqr">
+                  <div class="clearfix"></div></div></td></tr></tbody></table></div></div>
                 <form action="#">
                   <div class="form-group">
                     <%= f.email_field :email, autofocus: true , :class => 'form-control', :required => true, placeholder: "Email"%>

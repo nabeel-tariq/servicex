@@ -42,7 +42,6 @@ class ContractorsController < ApplicationController
   # PATCH/PUT /contractors/1
   # PATCH/PUT /contractors/1.json
   def update
-    debugger
     respond_to do |format|
       if @contractor.update(contractor_params)
         @contractor.user.complete!

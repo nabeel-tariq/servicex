@@ -7,7 +7,7 @@ class User < ApplicationRecord
   enum account_stage: {incomplete: 0, complete: 1}
 
   def self.create_from_provider_data(provider_data)
-    where(provider: provider_data.provider, uid: provider_data.uid).first_or_create do | user |
+    where(provider: provider_data.provider, uid: provider_data.uid).first_or_create! do | user |
       if user.profileable_type.present?
       else
         employer = Employer.create(first_name: provider_data.info.name.split[0], last_name: provider_data.info.name.split[1], is_active: true)

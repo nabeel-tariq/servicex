@@ -20,7 +20,7 @@
 
 $(document).ready(function() {
     $("#technician_form").hide();
-    google.maps.event.addDomListener(window, 'load', initialize);
+    // google.maps.event.addDomListener(window, 'load', initialize);
     initialize(".google_map")
 });
 

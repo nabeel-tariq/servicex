@@ -10,12 +10,12 @@
             <ul>
               <li class="item-wrap">
                 <div class="item">
+                  <div class="col-sm-3 p0">
                   <div class="item-image">
-                    <a href=""><%= image_tag @contractor.latest_image, class: "img-circle" %></a>
-                    <div class="item-price">
-                      <span>$45</span>
-                    </div>
+                    <a href=""><%= image_tag @contractor.latest_image %></a>
                   </div>
+                  </div>
+                  <div class="col-sm-9 p0">
                   <div class="item-description">
                     <div class="item-meta">
                       <div class="item-post-date">
@@ -28,12 +28,13 @@
                       </ul>
                     </div>
                     <div class="item-title">
-                      <h5><span><i class="fa fa-user"></i></span><a href="#"><%= @contractor.full_name %></a></h5>
-                      <h5><span><i class="fa fa-envelope-o"></i></span><a href="#"><%= @contractor.user.email %></a></h5>
+                      <h5><span><i class="fa fa-user pr"></i></span><a href="#"><%= @contractor.full_name %></a></h5>
+                      <h5><span><i class="fa fa-envelope-o pr"></i></span><a href="#"><%= @contractor.user.email %></a></h5>
                     </div>
-                    <div class="item-info">
-                      <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit.</p>
+                    <div class="item-info pl">
+                      <p class="pl-lg">Duis autem vel eum iriure dolor in hendrerit in vulputate velit.</p>
                     </div>
+                  </div>
                   </div>
                 </div>
               </li>
