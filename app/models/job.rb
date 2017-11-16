@@ -1,5 +1,4 @@
 class Job < ApplicationRecord
-  has_many :contact_numbers, as: :contactable, dependent: :destroy
   has_many :attachments, as: :attachable, dependent: :destroy
   has_many :biddings, dependent: :destroy
   has_many :jobs_services, dependent: :destroy

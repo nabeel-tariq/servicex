@@ -5,7 +5,7 @@ class ContractorServicesController < ApplicationController
   # GET /contractors
   # GET /contractors.json
   def index
-    @contractors = Contractor.all
+    @contractors = ContractorService.all
   end
 
   # GET /contractors/1
@@ -15,7 +15,7 @@ class ContractorServicesController < ApplicationController
 
   # GET /contractors/new
   def new
-    @contractor = Contractor.new
+    @contractor_service = ContractorService.new
   end
 
   # GET /contractors/1/edit
@@ -26,16 +26,13 @@ class ContractorServicesController < ApplicationController
   # POST /contractors
   # POST /contractors.json
   def create
-    @contractor = Contractor.new(contractor_params)
+    service_ids = params[:service_ids] if params[:service_ids].present?
+    service_ids.each do |service_id|
+      ContractorService.create(contractor_id: params[:contractor_service][:contractor_id],service_id: service_id)
+    end
 
     respond_to do |format|
-      if @contractor.save
-        format.html { redirect_to @contractor, notice: 'Contractor was successfully created.' }
-        format.json { render :show, status: :created, location: @contractor }
-      else
-        format.html { render :new }
-        format.json { render json: @contractor.errors, status: :unprocessaservice_idble_entity }
-      end
+      format.html { redirect_to root_path, notice: 'Contractor was successfully created.' }
     end
   end
 
@@ -43,14 +40,14 @@ class ContractorServicesController < ApplicationController
   # PATCH/PUT /contractors/1.json
   def update
     respond_to do |format|
-      if @contractor.update(contractor_params)
-        @contractor.locations.build
+      if @contractor_service.update(contractor_params)
+        @contractor_service.locations.build
         format.js { render "update" }
         format.html { redirect_to edit_contractor_path, notice: 'Contractor was successfully updated.' }
-        format.json { render :show, status: :ok, location: @contractor }
+        format.json { render :show, status: :ok, location: @contractor_service }
       else
         format.html { render :edit }
-        format.json { render json: @contractor.errors, status: :unprocessable_entity }
+        format.json { render json: @contractor_service.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -58,7 +55,7 @@ class ContractorServicesController < ApplicationController
   # DELETE /contractors/1
   # DELETE /contractors/1.json
   def destroy
-    @contractor.destroy
+    @contractor_service.destroy
     respond_to do |format|
       format.html { redirect_to contractors_url, notice: 'Contractor was successfully destroyed.' }
       format.json { head :no_content }
@@ -68,7 +65,7 @@ class ContractorServicesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_contractor
-      @contractor = ContractorService.find(params[:id])
+      @contractor_service = ContractorService.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
