@@ -3,9 +3,9 @@
   <div class="product-section avtpost-fields">
     <div class="row">
       <%= f.fields_for :locations do |location_fields| %>
-          <%= location_fields.text_field :latitude, autofocus: true , :class => 'form-control', :required => true, id: 'searchTextField' %>
-          <%= location_fields.text_field :longitude, autofocus: true , :class => 'form-control', :required => true, id: 'searchTextField' %>
-          <%= location_fields.text_field :name, autofocus: true , :class => 'form-control google_map', :required => true, id: 'searchTextField' %>
+          <%= location_fields.text_field :latitude, autofocus: true , :class => 'form-control', :required => true, id: "latitude_field_#{location_fields.object.id}" %>
+          <%= location_fields.text_field :longitude, autofocus: true , :class => 'form-control', :required => true, id: "longitude_field_#{location_fields.object.id}"%>
+          <%= location_fields.text_field :name, autofocus: true , :class => 'form-control google_map' ,latitude_field: "#latitude_field_#{location_fields.object.id}" , longitude_field: "#longitude_field_#{location_fields.object.id}" ,callback: "f=function (data){console.log(data)};", :required => true, id: 'searchTextField' %>
           <div class=" "></div>
       <% end %>
       <%#= f.add_nested_fields_link :locations %>

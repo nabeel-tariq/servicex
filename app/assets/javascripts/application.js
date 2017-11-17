@@ -40,7 +40,7 @@ function hide(){
     $("#technician_listing").show();
 }
 
-function initialize(selector,call_back) {
+function initialize(selector) {
     var input2 = $(selector);
     input2.each(function (i,elem) {
     var autocomplete2 = new google.maps.places.Autocomplete(elem);
@@ -60,10 +60,9 @@ function initialize(selector,call_back) {
                 (place.address_components[2] && place.address_components[2].short_name || '')
             ].join(' ');
         }
-        if(call_back)
-        call_back.call(place);
-        $("#technician_location_attributes_latitude").val(place.geometry.location.lat());
-        $("#technician_location_attributes_longitude").val(place.geometry.location.lng());
+        $(elem).attr('callback') && eval($(elem).attr('callback'))(place); //This is just for demo purpose we dont need it really.
+        $($(elem).attr('latitude_field')).val(place.geometry.location.lat());
+        $($(elem).attr('longitude_field')).val(place.geometry.location.lng());
         return;
     });
     });
