@@ -66,7 +66,9 @@
                       </ul>
                     </li>
                   </ul>
-                  <%= link_to('Post Job', new_job_path, class: "btn btn-primary") %>
+                  <% if current_user && current_user.is_employer? %>
+                    <%= link_to('Post Job', new_job_path, class: "btn btn-primary") %>
+                  <% end %>
                 </div>
               </div>
           <% else %>
@@ -86,7 +88,9 @@
                       </a>
                     </li>
                   </ul>
-                  <%= link_to('Post Ad', new_job_path, class: "btn btn-primary") %>
+                  <% if current_user && current_user.is_employer? %>
+                    <%= link_to('Post Ad', new_job_path, class: "btn btn-primary") %>
+                  <% end %>
                 </div>
               </div>
           <% end %>

@@ -69,7 +69,7 @@ class JobsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
-      params.require(:job).permit(:name, :description, :status_id, :employer_id,
+      params.require(:job).permit(:name, :description, :status_id, :employer_id, :ad_type, :budget, service_ids: [],
                                   location_attributes: [:id, :name, :address_1, :address_2, :zip_code, :city_id, :longitude, :latitude],
                                   attachments_attributes: [:id, :name, :image_type, :document],
                                   jobs_services_attributes: [:id, :job_id, :service_id])

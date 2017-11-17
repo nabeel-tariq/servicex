@@ -9,7 +9,8 @@ class Job < ApplicationRecord
 
   belongs_to :employer
 
-  accepts_nested_attributes_for :contact_numbers
+  enum ad_type: {personal: 0, business: 1}
+
   accepts_nested_attributes_for :attachments
   accepts_nested_attributes_for :location
   accepts_nested_attributes_for :jobs_services
@@ -17,7 +18,6 @@ class Job < ApplicationRecord
   validates_presence_of :name, :description, :employer_id
 
   def initialize_nested_attri
-    self.contact_numbers.length > 0 ? self.contact_numbers : self.contact_numbers.build
     self.attachments.length > 0 ? self.attachments : self.attachments.build
     self.location ||= Location.new
     self.jobs_services.length > 0 ? self.jobs_services : self.jobs_services.build

@@ -24,4 +24,14 @@ class User < ApplicationRecord
     "#{self.first_name} #{self.last_name}".titleize
     "#{self.profileable.first_name} #{self.profileable.last_name}".titleize if self.profileable
   end
+
+  def is_employer?
+    return true if self.profileable_type == 'Employer'
+    return false
+  end
+
+  def is_contractor?
+    return true if self.profileable_type == 'Contractor'
+    return false
+  end
 end

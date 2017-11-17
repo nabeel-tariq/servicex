@@ -24,4 +24,12 @@ class Employer < ApplicationRecord
   def full_name
     "#{self.first_name} #{self.last_name}".titleize
   end
+
+  def get_contact_numbers
+    self.profileable.contact_numbers
+  end
+
+  def address
+    self.profileable.location.name
+  end
 end
