@@ -13,9 +13,15 @@
 //= require jquery
 //= require jquery_ujs
 // //= require technician
+//= require bootstrap.min
+//= require cable
+//= require custom
+//= require technician
+//= require modernizr.min
+//= require map
+//= require gmaps.min
 //= require nested_form_fields
 //= require owl.carousel.min
-//= require_tree .
 
 
 $(document).ready(function() {
@@ -37,14 +43,13 @@ function hide(){
 function initialize(selector,call_back) {
     var input2 = $(selector);
     input2.each(function (i,elem) {
-    console.log(elem);
     var autocomplete2 = new google.maps.places.Autocomplete(elem);
     google.maps.event.addListener(autocomplete2, 'place_changed', function() {
-        input.className = '';
+        autocomplete2.className = '';
         var place = autocomplete2.getPlace();
         if (!place.geometry) {
             // Inform the user that the place was not found and return.
-            input.className = 'notfound';
+            autocomplete2.className = 'notfound';
             return;
         }
         var address = '';
@@ -78,4 +83,29 @@ $.fn.closestChild = function(selector) {
     } else {
         return $children.closestChild(selector);
     }
-}; 
+};
+function open_tab_from_hash() {
+    var hash = window.location.hash;
+
+    if (hash && hash.split('_tab')[0]) {
+        //$('li a[role="tab"][href="' + hash.split('_tab')[0] + '"]').addClass('active');
+        $('li a[href="' + hash.split('_tab')[0] + '"]').tab('show')//.trigger('shown.bs.tab');
+        $('.nav.nav-tabs li.active a').trigger('shown.bs.tab');
+    } else {
+        if ($('.nav.nav-tabs li.active').length == 0)
+            $('li a[role="tab"]:first').tab('show');
+        else {
+            $('.nav.nav-tabs li.active a').trigger('shown.bs.tab');
+        }
+    }
+}
+function tab_open(){
+    $('ul.nav.nav-tabs li a').on("shown.bs.tab", function(e) {
+        var id = $(e.target).attr("href").substr(1);
+        window.location.hash = id + "_tab";
+    });
+
+// on load of the page: switch to the currently selected tab
+    open_tab_from_hash();
+}
+$(document).ready(tab_open);

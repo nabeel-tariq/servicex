@@ -1,10 +1,10 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
-      <div class="card" style="margin-top: 10% !important;">
+      <div class="card pt-xl">
         <div class="col-sm-12" style="padding-left: 0px !important;">
           <div class="col-sm-5">
-            <a href="#"><%= image_tag @employer.latest_image, class: "img-circle" %></a>
+            <a href="#"><%= image_tag @employer.latest_image %></a>
           </div>
           <div class="col-sm-7 pull-left">
             <ul>
@@ -24,7 +24,7 @@
                 <span>
                   <i class="fa fa-phone"></i>
                 </span>
-                <a href="#"><%= @employer.user.account_stage %></a>
+                <a href="#"><%= @employer.contact_numbers.first.try(&:text_value) %></a>
               </li>
             </ul>
           </div>

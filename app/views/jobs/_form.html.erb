@@ -1,22 +1,18 @@
 <% model = @job ||= Job.new %>
 <% if user_signed_in? %>
 <div class="page">
-  <div class="avt-post-wrapper section">
+  <div class="avt-post-wrapper section pt0">
     <div class="container">
       <div class="avt-post">
         <%= form_for setup_job_model(model), :html => {:multipart => true}  do |f| %>
           <fieldset>
             <div class="product-section avtpost-fields">
               <div class="row">
-                <div class="col-xs-12">
-                  <h3>Post Your ad</h3>
-                </div>
                 <div class="col-md-6">
                   <div class="post-inner">
                     <div class="row form-group">
                       <label class="col-md-4">Title Of Ad: </label>
                       <div class="col-md-8">
-                        <%= f.hidden_field :employer_id, value: current_user.profileable.id %>
                         <%= f.text_field :name, autofocus: true , :class => 'form-control', :required => true, placeholder: "Ad Title Go There"%>
                       </div>
                     </div>
@@ -27,11 +23,7 @@
                     <div class="row form-group">
                       <label class="col-md-4">Select Services: </label>
                       <div class="col-md-8">
-                        <select name="job[service_ids][]" multiple="multiple" id="contractor_service_ids" class="form-control">
-                          <%Service.all.each do |option|%>
-                              <option value="<%= option.id %>"><%= option.name %> </option>
-                          <%end%>
-                        </select>
+                        <%=select_tag 'job[service_ids][]',options_from_collection_for_select(Service.order(:name),:id,:name,model.services.pluck(:id)),multiple: :true,id: :contractor_service_ids,class: "form-control"%>
                       </div>
                     </div>
                   </div><!-- post-inner -->
@@ -55,7 +47,7 @@
                     <div class="row form-group">
                       <label class="col-md-4">Time: </label>
                       <div class="col-md-8">
-                        <%= f.text_field :time, autofocus: true , :class => 'form-control', :required => true, placeholder: "Time"%>
+                        <%= f.time_field :time, autofocus: true , :class => 'form-control', :required => true, placeholder: "Time"%>
                       </div>
                     </div>
                   </div><!-- post-inner -->
@@ -101,22 +93,10 @@
                       </div>
                     </div>
                   </div><!-- post-inner -->
-                </div>
-
-                <div class="col-md-6">
-                  <div class="post-inner">
-                    <div class="row form-group">
-                      <label class="col-md-4">Description: </label>
-                      <div class="col-md-8">
-                        <%= f.text_area :description, autofocus: true , :class => 'form-control', :required => true, placeholder: "Write details about your product"%>
-                      </div>
-                    </div>
-                  </div><!-- post-inner -->
-                </div>
-                <%= f.fields_for :attachments do |attachment| %>
+                  <%= f.fields_for :attachments do |attachment| %>
                     <%= attachment.hidden_field :image_type, value: 'Jobs Picture'%>
                     <%= attachment.hidden_field :name, value: 'Testing' %>
-                    <div class="col-md-6">
+                    <div class="col-md-12 p0">
                       <div class="post-inner">
                         <div class="row form-group">
                           <label class="col-md-4">Upload Photo: </label>
@@ -130,7 +110,19 @@
                         </div>
                       </div>
                     </div>
-                <% end %>
+                  <% end %>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="post-inner">
+                    <div class="row form-group">
+                      <label class="col-md-4">Description: </label>
+                      <div class="col-md-8">
+                        <%= f.text_area :description, autofocus: true , :class => 'form-control', :required => true, placeholder: "Write details about your product"%>
+                      </div>
+                    </div>
+                  </div><!-- post-inner -->
+                </div>
               </div>
             </div><!-- product-section -->
 
