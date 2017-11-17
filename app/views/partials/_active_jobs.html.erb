@@ -1,0 +1,36 @@
+<div class="col-sm-12" style="padding-left: 0px !important;">
+  <div class="col-sm-3">
+    <a href="#"><%= image_tag @employer.latest_image, class: "img-circle" %></a>
+  </div>
+  <div class="col-sm-9 pull-left">
+    <ul>
+      <%@employer.jobs.each do |job|%>
+          <li>
+                <span>
+                  <i class="fa fa-user"></i>
+                </span>
+            <a href="#"><%= job.name %></a>
+          </li>
+          <li>
+                <span>
+                  <i class="fa fa-envelope-o"></i>
+                </span>
+            <a href="#"><%= job.description %></a>
+          </li>
+          <li>
+                <span>
+                  <i class="fa fa-phone"></i>
+                </span>
+            <a href="#"><%= job.budget %></a>
+          </li>
+          <li>
+                <span>
+                  <i class="fa fa-phone"></i>
+                </span>
+            <a href="#"><%= job.time %></a>
+          </li>
+      <% end %>
+
+    </ul>
+  </div>
+</div>

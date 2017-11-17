@@ -32,15 +32,15 @@
 
         <ul class="nav nav-tabs nav-tab nav-justified" id="myTab">
           <li class="active"><a class="tab-btn" href="#profile" data-toggle="tab">Profile</a></li>
-          <li><a class="tab-btn" href="#services" data-toggle="tab">Active Jobs</a></li>
+          <li><a class="tab-btn" href="#jobs" data-toggle="tab">Active Jobs</a></li>
         </ul>
 
         <div class="tab-content">
           <div class="tab-pane fade in active" id="profile">
             <%= render "partials/complete_information_form", locals: { user: @employer }%>
           </div>
-          <div class="tab-pane fade" id="services">
-            <%#= render "partials/contractor_services_form", locals: { user: @employer }%>
+          <div class="tab-pane fade" id="jobs">
+            <%= render "partials/active_jobs", locals: { employer: @employer }%>
           </div>
         </div>
 
