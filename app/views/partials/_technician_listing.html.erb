@@ -1,0 +1,50 @@
+<ul>
+  <% @contractor.technicians.each do |technician| %>
+      <li class="item-wrap">
+        <div class="item">
+          <div class="item-image">
+            <a href=""><%= image_tag technician.latest_image, class: "img-circle" %></a>
+            <div class="item-price">
+              <span>$45</span>
+            </div>
+          </div>
+          <div class="item-description">
+            <div class="item-meta">
+              <div class="item-post-date">
+                <span>Today, 12:29 pm</span>
+              </div>
+              <ul class="list-inline product-social">
+                <li>
+                  <%= link_to edit_technician_path, :remote => true do %>
+                      <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to technician, :method => :delete, :confirm => "Are you sure?" ,:remote => true do %>
+                      <i class="fa fa-trash-o text-danger" aria-hidden="true"></i>
+                  <% end %>
+                </li>
+              </ul>
+            </div>
+            <div class="item-title">
+              <h5><span><i class="fa fa-user"></i></span><a href="#"><%= technician.full_name %></a></h5>
+              <h5><span><i class="fa fa-envelope-o"></i></span><a href="#"><%= technician.last_name %></a></h5>
+            </div>
+            <div class="item-info">
+              <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit.</p>
+            </div>
+          </div>
+        </div>
+      </li>
+  <% end %>
+</ul>
+
+<script>
+  function deleteTechnician(){
+    console.log('This is awsome');
+  }
+
+  function editTechnician(){
+    console.log('This is awsome');
+  }
+</script>

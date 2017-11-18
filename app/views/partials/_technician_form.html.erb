@@ -11,38 +11,9 @@
       <div class="category-adds">
         <div class="category-tab">
           <div class="tab-content list-view-tab">
-            <ul>
-              <% @contractor.technicians.each do |technician| %>
-                  <li class="item-wrap">
-                    <div class="item">
-                      <div class="item-image">
-                        <a href=""><%= image_tag technician.latest_image, class: "img-circle" %></a>
-                        <div class="item-price">
-                          <span>$45</span>
-                        </div>
-                      </div>
-                      <div class="item-description">
-                        <div class="item-meta">
-                          <div class="item-post-date">
-                            <span>Today, 12:29 pm</span>
-                          </div>
-                          <ul class="list-inline product-social">
-                            <li><a><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
-                            <li><a><i class="fa fa-trash-o text-danger" aria-hidden="true"></i></a></li>
-                          </ul>
-                        </div>
-                        <div class="item-title">
-                          <h5><span><i class="fa fa-user"></i></span><a href="#"><%= technician.full_name %></a></h5>
-                          <h5><span><i class="fa fa-envelope-o"></i></span><a href="#"><%= technician.last_name %></a></h5>
-                        </div>
-                        <div class="item-info">
-                          <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit.</p>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-              <% end %>
-            </ul>
+            <div id="technicians_listing">
+              <%= render 'partials/technician_listing', locals: {technicians: @contractor.technicians} %>
+            </div>
           </div>
         </div>
       </div>

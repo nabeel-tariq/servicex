@@ -56,6 +56,7 @@ class TechniciansController < ApplicationController
   def destroy
     @technician.destroy
     respond_to do |format|
+      format.js { render "destroy" }
       format.html { redirect_to technicians_url, notice: 'Technician was successfully destroyed.' }
       format.json { head :no_content }
     end
@@ -65,6 +66,7 @@ class TechniciansController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_technician
       @technician = Technician.find(params[:id])
+      @contractor = @technician.contractor if @technician.contractor
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
