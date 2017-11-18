@@ -32,6 +32,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem "haml-rails", "~> 1.0"
 gem 'omniauth-facebook', '~> 4.0'
+gem 'omniauth-google-oauth2', '~> 0.4.1'
 gem 'activerecord-session_store', '~> 1.0'
 gem "parsley-rails"
 # Use Redis adapter to run Action Cable in production
