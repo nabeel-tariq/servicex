@@ -4,7 +4,7 @@
   <div class="avt-post-wrapper section pt0">
     <div class="container">
       <div class="avt-post">
-        <%= form_for setup_job_model(model), :html => {:multipart => true}  do |f| %>
+        <%= form_for setup_job_model(model)  do |f| %>
           <fieldset>
             <div class="product-section avtpost-fields">
               <div class="row">
@@ -103,7 +103,7 @@
                           <div class="col-md-8">
                             <div class="upload-section">
                               <label class="upload-image" for="uploadOne">
-                                <%= attachment.file_field :document, :multiple =>:true %>
+                                <%= attachment.file_field :document %>
                               </label>
                             </div>
                           </div>

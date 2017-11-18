@@ -26,10 +26,10 @@ class Employer < ApplicationRecord
   end
 
   def get_contact_numbers
-    self.profileable.contact_numbers
+    self.contact_numbers
   end
 
   def address
-    self.profileable.location.name
+    self.location.name
   end
 end

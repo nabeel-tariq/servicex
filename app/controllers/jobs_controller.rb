@@ -26,7 +26,7 @@ class JobsController < ApplicationController
   # POST /jobs.json
   def create
     @job = @employer.jobs.build(job_params)
-
+debugger
     respond_to do |format|
       if @job.save
         format.html { redirect_to edit_employer_path(@employer,anchor: "jobs_tab"), notice: 'Job was successfully created.' }

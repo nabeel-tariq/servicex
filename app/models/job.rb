@@ -24,4 +24,8 @@ class Job < ApplicationRecord
     self
   end
 
+  def latest_image
+    attachments.present? ? attachments.last.document.url(:thumb) : "#{APP_URL}/images/missing.png"
+  end
+
 end

@@ -70,6 +70,6 @@ class ContractorServicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contractor_params
-      params.require(:contractor_service).permit(:id,locations_attributes: [:name,:latitude,:longitude,:id])
+      params.require(:contractor_service).permit(:id,locations_attributes: [:name, :radius,:latitude,:longitude,:id])
     end
 end

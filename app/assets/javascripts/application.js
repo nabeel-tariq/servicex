@@ -18,8 +18,8 @@
 //= require custom
 //= require technician
 //= require modernizr.min
-//= require map
 //= require gmaps.min
+//= require map
 //= require nested_form_fields
 //= require owl.carousel.min
 

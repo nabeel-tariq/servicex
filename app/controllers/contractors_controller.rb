@@ -75,7 +75,7 @@ class ContractorsController < ApplicationController
     def contractor_params
       params.require(:contractor).permit(:first_name, :last_name, :shop_name, :is_active,
                                          contact_numbers_attributes: [ :id, :text_value ],
-                                         location_attributes: [:id, :name, :address_1, :address_2, :zip_code, :city_id, :longitude, :latitude,
+                                         location_attributes: [:id, :name, :radius, :address_1, :address_2, :zip_code, :city_id, :longitude, :latitude,
                                          contact_numbers_attributes: [ :id, :text_value ]],
                                          attachments_attributes: [:id, :name, :image_type, :document],
                                          contractor_services_attributes: [:id, :contractor_id, :service_id, locations_attributes: [:id, :name, :address_1, :address_2, :zip_code, :city_id, :longitude, :latitude ]])

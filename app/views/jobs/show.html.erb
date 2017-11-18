@@ -1,0 +1,143 @@
+<head>
+  <!-- font -->
+  <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,500,700,300' rel='stylesheet' type='text/css'>
+
+  <!-- favicon icon -->
+  <link rel="shortcut icon" type="image/x-icon" href="images/ico/favicon.ico">
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div class="page">
+  <div class="all-categories section">
+    <div class="container">
+      <div class="ad-details">
+        <div class="row">
+          <div class="col-md-8 col-sm-7">
+            <div class="item">
+              <div class="detail-item-image item-image carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="item active">
+                    <%@job.attachments.each do |image|%>
+                        <div class="item">
+                          <%= image_tag image.document.url, class: "img-responsive" %>
+                        </div>
+                    <%end%>
+                  </div>
+                </div>
+                <a class="left-control" href=".detail-item-image" role="button" data-slide="prev">
+                  <i class="fa fa-angle-left" aria-hidden="true"></i>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="right-control" href=".detail-item-image" role="button" data-slide="next">
+                  <i class="fa fa-angle-right" aria-hidden="true"></i>
+                  <span class="sr-only">Next</span>
+                </a>
+                <div class="item-price">
+                  <span><%= @job.try(:budget)%></span>
+                </div>
+              </div>
+              <div class="details-description">
+                <div class="item-info item-meta">
+                  <div class="item-post-date">
+                    <span><i class="fa fa-clock-o"></i><%= @job.created_at.strftime("%b %d, %Y") %></span>
+                  </div>
+                  <div class="ad-title">
+                    <h3><%= @job.try(:name)%></h3>
+                  </div>
+                  <ul class="list-inline product-social">
+                    <li><a href="#"><i class="fa fa-bookmark-o" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-share-alt" aria-hidden="true"></i></a></li>
+                  </ul>
+                </div><!-- item-info -->
+                <div class="item-info">
+                  <h4>Description</h4>
+                  <p><%= @job.try(:description)%></p>
+                </div><!-- item-info -->
+                <div class="item-info">
+                  <h4>Other Info</h4>
+                  <ul>
+                    <li>Ad Type : <%= @job.try(:ad_type)%></li>
+                    <li>Budget : Rs <%= @job.try(:budget)%> </li>
+                    <li>Time : <%= @job.try(:time).strftime("%I:%M%p")%></li>
+                    <li>Services Require : <%= @job.services.map{|s| [s.name]}.join(',') %></li>
+                    <li>At Location : <%= @job.location.try(:name) %></li>
+                  </ul>
+                </div><!-- item-info -->
+              </div>
+            </div><!-- item -->
+            <div class="location-map">
+              <h4>Seller Location</h4>
+              <div id="gmap"></div>
+            </div>
+          </div>
+
+
+          <div class="col-sm-5 col-md-4">
+            <div class="side-bar">
+              <div class="item-author widget">
+                <h4>Seller Info</h4>
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="seller-image">
+                      <%= image_tag @job.employer.latest_image, class: "img-responsive" %>
+                    </div>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="seller-info">
+                      <p><span>Employer:</span> <a href="#"><%= @job.employer.full_name %></a></p>
+                      <address>
+                        <span>Address:</span> <%= @job.employer.address %>
+                      </address>
+                      <p><span>Phone :</span> <%= @job.employer.get_contact_numbers.first.try(:text_value) %> </p>
+                      <!--<p><a href="#">View other items of this seller</a></p>-->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="contact-seller widget">
+                <h4>Contact Seller</h4>
+                <form id="contact-form" class="contact-form" name="contact-form" method="post" action="#">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <input type="text" class="form-control" required="required" placeholder="Name">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <input type="email" class="form-control" required="required" placeholder="Email Id">
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <input type="text" class="form-control" required="required" placeholder="Subject">
+                      </div>
+                    </div>
+
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <textarea name="message" id="message" required="required" class="form-control" rows="7" placeholder="Message"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Submit Message</button>
+                  </div>
+
+                </form>
+              </div>
+            </div><!-- side-bar -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> <!-- all-categories -->
+</div>	<!-- page -->
+</body>
