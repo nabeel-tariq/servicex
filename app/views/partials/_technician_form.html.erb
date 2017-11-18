@@ -1,23 +1,9 @@
 <% content_for :javascript_includes do %>
     <%= javascript_include_tag "technician" %>
 <% end %>
-<% profile = Technician.new %>
+<% profile = @technician ||= Technician.new %>
 <div class="avt-post-wrapper">
   <div class="container">
-    <div class="submit-section text-center pull-left">
-      <button type="button" class="btn btn-primary" onclick="show_hide_technician_form()"><i class="fa fa-plus" aria-hidden="true"></i></button>
-    </div>
-    <div class="col-sm-12" id="technician_listing">
-      <div class="category-adds">
-        <div class="category-tab">
-          <div class="tab-content list-view-tab">
-            <div id="technicians_listing">
-              <%= render 'partials/technician_listing', locals: {technicians: @contractor.technicians} %>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
     <div id="technician_form">
       <div class="avt-post col-sm-12">
         <%= form_for setup_profileable_model(profile) do |f| %>

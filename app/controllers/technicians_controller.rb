@@ -42,7 +42,7 @@ class TechniciansController < ApplicationController
   def update
     respond_to do |format|
       if @technician.update(technician_params)
-        format.html { redirect_to @technician, notice: 'Technician was successfully updated.' }
+        format.html { redirect_to edit_contractor_path @technician.contractor , notice: 'Technician was successfully updated.' }
         format.json { render :show, status: :ok, location: @technician }
       else
         format.html { render :edit }

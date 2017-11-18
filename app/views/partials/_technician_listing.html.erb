@@ -15,7 +15,7 @@
               </div>
               <ul class="list-inline product-social">
                 <li>
-                  <%= link_to edit_technician_path, :remote => true do %>
+                  <%= link_to edit_technician_path technician do %>
                       <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                   <% end %>
                 </li>
@@ -38,13 +38,3 @@
       </li>
   <% end %>
 </ul>
-
-<script>
-  function deleteTechnician(){
-    console.log('This is awsome');
-  }
-
-  function editTechnician(){
-    console.log('This is awsome');
-  }
-</script>

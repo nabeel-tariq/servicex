@@ -59,7 +59,23 @@
               <div class="tab-pane fade" id="services">
                 <%= render "partials/contractor_services_form", locals: { user: @contractor }%>
               </div>
+
               <div class="tab-pane fade" id="technicians">
+                <div class="submit-section text-center pull-left">
+                  <button type="button" class="btn btn-primary" onclick="show_hide_technician_form()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                </div>
+                <div class="col-sm-12" id="technician_listing">
+                  <div class="category-adds">
+                    <div class="category-tab">
+                      <div class="tab-content list-view-tab">
+                        <div id="technicians_listing">
+                          <%= render 'partials/technician_listing', locals: {technicians: @contractor.technicians} %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 <%= render "partials/technician_form", locals: { user: @technician }%>
               </div>
             </div>
