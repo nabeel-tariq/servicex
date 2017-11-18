@@ -22,7 +22,7 @@
 //= require map
 //= require nested_form_fields
 //= require owl.carousel.min
-
+//= require parsley
 
 $(document).ready(function() {
     // google.maps.event.addDomListener(window, 'load', initialize);

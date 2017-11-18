@@ -47,3 +47,19 @@ div.panel {
   display: none;
   background-color: white;
 }
+
+.parsley-errors-list li.parsley-required {
+  color: red;
+  padding-left: 15px;
+}
+
+.parsley-errors-list li.parsley-type {
+  color: red;
+  padding-left: 15px;
+}
+
+
+.parsley-errors-list li.parsley-pattern {
+  color: red;
+  padding-left: 15px;
+}

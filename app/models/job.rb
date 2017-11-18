@@ -17,7 +17,7 @@ class Job < ApplicationRecord
 
   validates_presence_of :name, :description, :employer_id
 
-  def initialize_nested_attri
+  def initialize_nested_attributes
     self.attachments.length > 0 ? self.attachments : self.attachments.build
     self.location ||= Location.new
     self.jobs_services.length > 0 ? self.jobs_services : self.jobs_services.build

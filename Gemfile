@@ -33,6 +33,7 @@ gem 'jbuilder', '~> 2.5'
 gem "haml-rails", "~> 1.0"
 gem 'omniauth-facebook', '~> 4.0'
 gem 'activerecord-session_store', '~> 1.0'
+gem "parsley-rails"
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
