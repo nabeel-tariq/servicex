@@ -23,7 +23,7 @@
                     <div class="row form-group">
                       <label class="col-md-4">Select Services: </label>
                       <div class="col-md-8">
-                        <%=select_tag 'job[service_ids][]',options_from_collection_for_select(Service.order(:name),:id,:name,model.services.pluck(:id)),multiple: :true,id: :contractor_service_ids,class: "form-control", 'data-parsley-required': "true"%>
+                        <%=select_tag 'job[service_ids][]',options_from_collection_for_select(Service.order(:name),:id,:name,model.services.pluck(:id)),multiple: :true,id: :contractor_service_ids,class: "form-control select2", 'data-parsley-required': "true"%>
                       </div>
                     </div>
                   </div><!-- post-inner -->
@@ -192,8 +192,4 @@
     </div>
   </div> <!-- avt-post -->
   </div>	<!-- page -->
-<% end %><script>
-  $(document).ready(function() {
-    $('#contractor_service_ids').select2();
-  });
-</script>
+<% end %>

@@ -26,7 +26,8 @@
 
 $(document).ready(function() {
     // google.maps.event.addDomListener(window, 'load', initialize);
-    initialize(".google_map")
+    initialize(".google_map");
+    $('select.select2').select2({width: "100%"});
 });
 
 function show_hide_technician_form(){

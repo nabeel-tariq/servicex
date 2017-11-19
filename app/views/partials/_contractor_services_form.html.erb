@@ -1,52 +1,53 @@
 <% profile= @employer ||= @contractor %>
 <div class="avt-post-wrapper">
   <div class="container pl0">
-      <div class="avt-post col-sm-12 pl0">
-        <%= form_for(ContractorService.new) do |f| %>
-            <%= f.hidden_field :contractor_id, value: @contractor.id %>
-            <select name="service_ids[]" multiple="multiple" id="contractor_service_ids" class="col-sm-12 form-control">
-              <%Service.all.each do |option|%>
-                  <option value="<%=option.id%>"><%=option.name%> </option>
-              <%end%>
-            </select>
-            <div class=" "></div>
-            <div class="submit-section text-center">
-              <div class="submit-button">
-                <%= f.submit "Add" , :class => 'btn btn-primary'%>
-              </div>
-            </div>
-        <% end %>
+    <div class="avt-post col-sm-12 pl0">
+      <%= form_for(ContractorService.new) do |f| %>
+        <%= f.hidden_field :contractor_id, value: @contractor.id %>
+        <div class="col-sm-6">
+          <select name="service_ids[]" multiple="multiple" id="contractor_service_ids" width="400px" class="select2 col-sm-12 form-control">
+            <%Service.all.each do |option|%>
+              <option value="<%=option.id%>"><%=option.name%> </option>
+            <%end%>
+          </select>
+        </div>
+        <div class=" "></div>
+        <div class="submit-section text-center">
+          <div class="submit-button">
+            <%= f.submit "Add" , :class => 'btn btn-primary'%>
+          </div>
+        </div>
+      <% end %>
 
-        <%profile.contractor_services.map &:initialize_nested%>
-        <% profile.contractor_services.each do |c_service|%>
-            <button class="accordion"><%=c_service.service.name%></button>
-            <div class="panel">
-              <div id="contactor_service_<%=c_service.id %>">
-                <%= render partial: 'partials/contractor_service' ,locals:  {c_service: c_service}%>
-              </div>
-            </div>
-        <% end %>
-      </div>
+      <%profile.contractor_services.map &:initialize_nested%>
+      <% profile.contractor_services.each do |c_service|%>
+        <button class="accordion"><%=c_service.service.name%></button>
+        <div class="panel">
+          <div id="contactor_service_<%=c_service.id %>">
+            <%= render partial: 'partials/contractor_service' ,locals:  {c_service: c_service}%>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
 
 <script>
-  $(document).ready(function() {
-    $('#contractor_service_ids').select2();
-  });
+    $(document).ready(function() {
+    });
 
-  var acc = document.getElementsByClassName("accordion");
-  var i;
+    var acc = document.getElementsByClassName("accordion");
+    var i;
 
-  for (i = 0; i < acc.length; i++) {
-    acc[i].onclick = function(){
-      this.classList.toggle("active");
-      var panel = this.nextElementSibling;
-      if (panel.style.display === "block") {
-        panel.style.display = "none";
-      } else {
-        panel.style.display = "block";
-      }
+    for (i = 0; i < acc.length; i++) {
+        acc[i].onclick = function(){
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
+            } else {
+                panel.style.display = "block";
+            }
+        }
     }
-  }
 </script>

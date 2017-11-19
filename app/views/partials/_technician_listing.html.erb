@@ -1,6 +1,6 @@
 <ul>
   <% @contractor.technicians.each do |technician| %>
-      <li class="item-wrap">
+      <li class="item-wrap" id="technician_<%=technician.id%>">
         <div class="item">
           <div class="item-image">
             <a href=""><%= image_tag technician.latest_image, class: "img-circle" %></a>
@@ -15,7 +15,7 @@
               </div>
               <ul class="list-inline product-social">
                 <li>
-                  <%= link_to edit_technician_path technician do %>
+                  <%= link_to (edit_technician_path technician),{remote: true} do %>
                       <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                   <% end %>
                 </li>

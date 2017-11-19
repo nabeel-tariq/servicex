@@ -19,6 +19,10 @@ class TechniciansController < ApplicationController
 
   # GET /technicians/1/edit
   def edit
+    respond_to do |format|
+      format.js {render :edit}
+      format.html {render :edit}
+    end
   end
 
   # POST /technicians
@@ -28,7 +32,7 @@ class TechniciansController < ApplicationController
 
     respond_to do |format|
       if @technician.save
-        format.html { redirect_to edit_contractor_path @technician.contractor, notice: 'Technician was successfully created.' }
+        format.html { redirect_to edit_contractor_path(@technician.contractor,anchor: "technicians_tab"), notice: 'Technician was successfully created.' }
         format.json { render :show, status: :created, location: @technician }
       else
         format.html { render :new }
