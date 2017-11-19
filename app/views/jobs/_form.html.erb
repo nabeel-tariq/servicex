@@ -4,7 +4,7 @@
   <div class="avt-post-wrapper section pt0">
     <div class="container">
       <div class="avt-post">
-        <%= form_for setup_job_model(model)  do |f| %>
+        <%= form_for setup_job_model(model),:html => { "data-parsley-validate" => true }  do |f| %>
           <fieldset>
             <div class="product-section avtpost-fields">
               <div class="row">
@@ -13,7 +13,7 @@
                     <div class="row form-group">
                       <label class="col-md-4">Title Of Ad: </label>
                       <div class="col-md-8">
-                        <%= f.text_field :name, autofocus: true , :class => 'form-control', :required => true, placeholder: "Ad Title Go There"%>
+                        <%= f.text_field :name, autofocus: true , :class => 'form-control','data-parsley-required': "true", placeholder: "Ad Title Go There"%>
                       </div>
                     </div>
                   </div><!-- post-inner -->
@@ -23,7 +23,7 @@
                     <div class="row form-group">
                       <label class="col-md-4">Select Services: </label>
                       <div class="col-md-8">
-                        <%=select_tag 'job[service_ids][]',options_from_collection_for_select(Service.order(:name),:id,:name,model.services.pluck(:id)),multiple: :true,id: :contractor_service_ids,class: "form-control"%>
+                        <%=select_tag 'job[service_ids][]',options_from_collection_for_select(Service.order(:name),:id,:name,model.services.pluck(:id)),multiple: :true,id: :contractor_service_ids,class: "form-control", 'data-parsley-required': "true"%>
                       </div>
                     </div>
                   </div><!-- post-inner -->
@@ -34,7 +34,7 @@
                       <label class="col-md-4">Location: </label>
                       <div class="col-md-8">
                         <%= f.fields_for :location do |location_fields| %>
-                          <%= location_fields.text_field :name, autofocus: true , :class => 'form-control google_map', :required => true, id: 'searchTextField' %>
+                          <%= location_fields.text_field :name, autofocus: true , :class => 'form-control google_map','data-parsley-required': "true", id: 'searchTextField' %>
                           <%= location_fields.hidden_field :latitude, :value => '' %>
                           <%= location_fields.hidden_field :longitude, :value => '' %>
                         <% end %>
@@ -47,7 +47,7 @@
                     <div class="row form-group">
                       <label class="col-md-4">Time: </label>
                       <div class="col-md-8">
-                        <%= f.time_field :time, autofocus: true , :class => 'form-control', :required => true, placeholder: "Time"%>
+                        <%= f.time_field :time, autofocus: true , :class => 'form-control','data-parsley-required': "true", placeholder: "Time"%>
                       </div>
                     </div>
                   </div><!-- post-inner -->
@@ -82,7 +82,7 @@
                       <div class="col-md-8">
                         <div class="row">
                           <div class="col-md-6">
-                            <%= f.text_field :budget, autofocus: true , :class => 'form-control', :required => true, placeholder: "Budget"%>
+                            <%= f.text_field :budget, autofocus: true , :class => 'form-control','data-parsley-required': "true", placeholder: "Budget"%>
                           </div>
                           <div class="col-md-6">
                             <div class="checkbox choose-option">
@@ -118,7 +118,7 @@
                     <div class="row form-group">
                       <label class="col-md-4">Description: </label>
                       <div class="col-md-8">
-                        <%= f.text_area :description, autofocus: true , :class => 'form-control', :required => true, placeholder: "Write details about your product"%>
+                        <%= f.text_area :description, autofocus: true , :class => 'form-control','data-parsley-required': "true", placeholder: "Write details about your product"%>
                       </div>
                     </div>
                   </div><!-- post-inner -->
@@ -156,7 +156,7 @@
                     <div class="row form-group">
                       <label class="col-md-4">Contact Number: </label>
                       <div class="col-md-8">
-                        <%= text_field_tag 'phone', current_user.profileable.contact_numbers.first.text_value, disabled: true, class: 'form-control' %>
+                        <%= text_field_tag 'phone', current_user.profileable.contact_numbers.length > 0 ? current_user.profileable.contact_numbers.first.text_value : '', disabled: true, class: 'form-control' %>
                       </div>
                     </div>
                   </div><!-- post-inner -->

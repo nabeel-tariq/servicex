@@ -72,7 +72,7 @@
                         <div class="col-md-8">
                           <%= location_fields.hidden_field :latitude,id: "latitude_field_#{location_fields.object.id}" %>
                           <%= location_fields.hidden_field :longitude, id: "longitude_field_#{location_fields.object.id}" %>
-                          <%= location_fields.text_field :name, autofocus: true, 'data-parsley-required' => "true",latitude_field: "#latitude_field_#{location_fields.object.id}", 'data-parsley-required' => "true" , longitude_field: "#longitude_field_#{location_fields.object.id}", class: 'form-control google_map' %>
+                          <%= location_fields.text_field :name, autofocus: true, 'data-parsley-required' => "true",latitude_field: "#latitude_field_#{location_fields.object.id}" , longitude_field: "#longitude_field_#{location_fields.object.id}", class: 'form-control google_map' %>
                         </div>
                       </div>
                     </div>
