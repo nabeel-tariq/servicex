@@ -1,195 +1,218 @@
 <% model = @job ||= Job.new %>
-<% if user_signed_in? %>
-<div class="page">
-  <div class="avt-post-wrapper section pt0">
-    <div class="container">
-      <div class="avt-post">
-        <%= form_for setup_job_model(model),:html => { "data-parsley-validate" => true }  do |f| %>
-          <fieldset>
-            <div class="product-section avtpost-fields">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="post-inner">
-                    <div class="row form-group">
-                      <label class="col-md-4">Title Of Ad: </label>
-                      <div class="col-md-8">
-                        <%= f.text_field :name, autofocus: true , :class => 'form-control','data-parsley-required': "true", placeholder: "Ad Title Go There"%>
-                      </div>
-                    </div>
-                  </div><!-- post-inner -->
-                </div>
-                <div class="col-md-6">
-                  <div class="post-inner select-cat">
-                    <div class="row form-group">
-                      <label class="col-md-4">Select Services: </label>
-                      <div class="col-md-8">
-                        <%=select_tag 'job[service_ids][]',options_from_collection_for_select(Service.order(:name),:id,:name,model.services.pluck(:id)),multiple: :true,id: :contractor_service_ids,class: "form-control select2", 'data-parsley-required': "true"%>
-                      </div>
-                    </div>
-                  </div><!-- post-inner -->
-                </div>
-                <div class="col-md-6">
-                  <div class="post-inner">
-                    <div class="row form-group">
-                      <label class="col-md-4">Location: </label>
-                      <div class="col-md-8">
-                        <%= f.fields_for :location do |location_fields| %>
-                          <%= location_fields.text_field :name, autofocus: true , :class => 'form-control google_map','data-parsley-required': "true", id: 'searchTextField' %>
-                          <%= location_fields.hidden_field :latitude, :value => '' %>
-                          <%= location_fields.hidden_field :longitude, :value => '' %>
+<div id="main-container">
+  <% if user_signed_in? %>
+      <div class="page">
+        <div class="avt-post-wrapper section pt0">
+          <div class="container">
+            <div class="avt-post">
+              <%= form_for setup_job_model(model),:html => { "data-parsley-validate" => true }  do |f| %>
+                  <fieldset>
+                    <div class="product-section avtpost-fields">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="post-inner">
+                            <div class="row form-group">
+                              <label class="col-md-4">Title Of Ad: </label>
+                              <div class="col-md-8">
+                                <%= f.text_field :name, autofocus: true , :class => 'form-control','data-parsley-required': "true", placeholder: "Ad Title Go There"%>
+                              </div>
+                            </div>
+                          </div><!-- post-inner -->
+                        </div>
+                        <div class="col-md-6">
+                          <div class="post-inner select-cat">
+                            <div class="row form-group">
+                              <label class="col-md-4">Select Services: </label>
+                              <div class="col-md-8">
+                                <%=select_tag 'job[service_ids][]',options_from_collection_for_select(Service.order(:name),:id,:name,model.services.pluck(:id)),multiple: :true,id: :contractor_service_ids,class: "form-control select2", 'data-parsley-required': "true"%>
+                              </div>
+                            </div>
+                          </div><!-- post-inner -->
+                        </div>
+                        <div class="col-md-6">
+                          <div class="post-inner">
+                            <div class="row form-group">
+                              <label class="col-md-4">Location: </label>
+                              <div class="col-md-8">
+                                <%= f.fields_for :location do |location_fields| %>
+                                    <%= location_fields.text_field :name, autofocus: true , :class => 'form-control google_map','data-parsley-required': "true", id: 'searchTextField' %>
+                                    <%= location_fields.hidden_field :latitude, :value => '' %>
+                                    <%= location_fields.hidden_field :longitude, :value => '' %>
+                                <% end %>
+                              </div>
+                            </div>
+                          </div><!-- post-inner -->
+                        </div>
+                        <div class="col-md-6">
+                          <div class="post-inner select-cat">
+                            <div class="row form-group">
+                              <label class="col-md-4">Time: </label>
+                              <div class="col-md-8">
+                                <%= f.text_field :time, autofocus: true, :class => 'form-control datetimepicker','data-parsley-required': "true", placeholder: "Time"%>
+                              </div>
+                            </div>
+                          </div><!-- post-inner -->
+                        </div>
+                        <div class="col-md-6">
+                          <div class="post-inner choose-options">
+                            <div class="row form-group">
+                              <label class="col-md-4">Ad Type: </label>
+                              <div class="col-md-8">
+                                <div class="row">
+                                  <div class="col-md-6">
+                                    <div class="choose-option">
+                                      <%= f.radio_button :ad_type, 'personal' %>
+                                      <label for="personal">Personal</label>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-6">
+                                    <div class="choose-option">
+                                      <%= f.radio_button :ad_type, 'business' %>
+                                      <label for="business">Business</label>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div><!-- post-inner -->
+                        </div>
+                        <div class="col-md-6">
+                          <div class="post-inner">
+                            <div class="row form-group">
+                              <label class="col-md-4">Budget:	</label>
+                              <div class="col-md-8">
+                                <div class="row">
+                                  <div class="col-md-6">
+                                    <%= f.text_field :budget, autofocus: true , :class => 'form-control','data-parsley-required': "true", placeholder: "Budget"%>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div><!-- post-inner -->
+                          <%= f.fields_for :attachments do |attachment| %>
+                              <%= attachment.hidden_field :image_type, value: 'Jobs Picture'%>
+                              <%= attachment.hidden_field :name, value: 'Testing' %>
+                              <div class="col-md-12 p0">
+                                <div class="post-inner">
+                                  <div class="row form-group">
+                                    <label class="col-md-4">Upload Photo: </label>
+                                    <div class="col-md-8">
+                                      <div class="upload-section">
+                                        <label class="upload-image" for="uploadOne">
+                                          <%= attachment.file_field :document %>
+                                        </label>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                          <% end %>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="post-inner">
+                            <div class="row form-group">
+                              <label class="col-md-4">Description: </label>
+                              <div class="col-md-8">
+                                <%= f.text_area :description, autofocus: true , :class => 'form-control','data-parsley-required': "true", placeholder: "Write details about your product"%>
+                              </div>
+                            </div>
+                          </div><!-- post-inner -->
+                        </div>
+
+                        <% if model.total_images_count > 0 %>
+                            <div class="col-md-6">
+                              <div class="post-inner">
+                                <div class="row form-group">
+                                  <label class="col-md-4">Pictures:	</label>
+                                  <div class="col-md-8">
+                                    <div class="row">
+                                      <div class="col-md-10">
+                                        <div class="seller-image">
+                                          <%= image_tag model.latest_image, class: "img-responsive" %>
+                                        </div>
+                                      </div>
+                                      <div class="col-md-2">
+                                        <%= link_to delete_picture_jobs_url(attachment_id: model.attachments.last.id),:remote => true do %>
+                                            <i class="fa fa-trash-o text-danger" aria-hidden="true"></i>
+                                        <% end %>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
                         <% end %>
                       </div>
                     </div>
-                  </div><!-- post-inner -->
-                </div>
-                <div class="col-md-6">
-                  <div class="post-inner select-cat">
-                    <div class="row form-group">
-                      <label class="col-md-4">Time: </label>
-                      <div class="col-md-8">
-                        <%= f.time_field :time, autofocus: true , :class => 'form-control','data-parsley-required': "true", placeholder: "Time"%>
-                      </div>
-                    </div>
-                  </div><!-- post-inner -->
-                </div>
-                <div class="col-md-6">
-                  <div class="post-inner choose-options">
-                    <div class="row form-group">
-                      <label class="col-md-4">Ad Type: </label>
-                      <div class="col-md-8">
-                        <div class="row">
-                          <div class="col-md-6">
-                            <div class="choose-option">
-                              <%= f.radio_button :ad_type, 'personal', checked: true %>
-                              <label for="personal">Personal</label>
+
+                    <div class="seller-section avtpost-fields">
+                      <div class="row">
+                        <div class="col-xs-12">
+                          <h3>Seller Information</h3>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="post-inner">
+                            <div class="row form-group">
+                              <label class="col-md-4">Contact Name: </label>
+                              <div class="col-md-8">
+                                <%= text_field_tag 'name', current_user.full_name, disabled: true, class: 'form-control' %>
+                              </div>
                             </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="choose-option">
-                              <%= f.radio_button :ad_type, 'business' %>
-                              <label for="business">Business</label>
+                          </div><!-- post-inner -->
+                        </div>
+                        <div class="col-md-6">
+                          <div class="post-inner">
+                            <div class="row form-group">
+                              <label class="col-md-4">Contact Email: </label>
+                              <div class="col-md-8">
+                                <%= text_field_tag 'email', current_user.email, disabled: true, class: 'form-control' %>
+                              </div>
                             </div>
-                          </div>
+                          </div><!-- post-inner -->
+                        </div>
+                        <div class="col-md-6">
+                          <div class="post-inner">
+                            <div class="row form-group">
+                              <label class="col-md-4">Contact Number: </label>
+                              <div class="col-md-8">
+                                <%= text_field_tag 'phone', current_user.profileable.contact_numbers.length > 0 ? current_user.profileable.contact_numbers.first.text_value : '', disabled: true, class: 'form-control' %>
+                              </div>
+                            </div>
+                          </div><!-- post-inner -->
+                        </div>
+                        <div class="col-md-6">
+                          <div class="post-inner">
+                            <div class="row form-group">
+                              <label class="col-md-4">Your Address: </label>
+                              <div class="col-md-8">
+                                <%= text_field_tag 'address', current_user.profileable.location.name, disabled: true, class: 'form-control' %>
+                              </div>
+                            </div>
+                          </div><!-- post-inner -->
                         </div>
                       </div>
-                    </div>
-                  </div><!-- post-inner -->
-                </div>
-                <div class="col-md-6">
-                  <div class="post-inner">
-                    <div class="row form-group">
-                      <label class="col-md-4">Budget:	</label>
-                      <div class="col-md-8">
-                        <div class="row">
-                          <div class="col-md-6">
-                            <%= f.text_field :budget, autofocus: true , :class => 'form-control','data-parsley-required': "true", placeholder: "Budget"%>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="checkbox choose-option">
-                              <label><input type="checkbox">Negotiable </label>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div><!-- post-inner -->
-                  <%= f.fields_for :attachments do |attachment| %>
-                    <%= attachment.hidden_field :image_type, value: 'Jobs Picture'%>
-                    <%= attachment.hidden_field :name, value: 'Testing' %>
-                    <div class="col-md-12 p0">
-                      <div class="post-inner">
-                        <div class="row form-group">
-                          <label class="col-md-4">Upload Photo: </label>
-                          <div class="col-md-8">
-                            <div class="upload-section">
-                              <label class="upload-image" for="uploadOne">
-                                <%= attachment.file_field :document %>
-                              </label>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  <% end %>
-                </div>
+                    </div><!-- seller-section -->
 
-                <div class="col-md-6">
-                  <div class="post-inner">
-                    <div class="row form-group">
-                      <label class="col-md-4">Description: </label>
-                      <div class="col-md-8">
-                        <%= f.text_area :description, autofocus: true , :class => 'form-control','data-parsley-required': "true", placeholder: "Write details about your product"%>
+                    <div class="submit-section">
+                      <div class="ad-condition checkbox">
+                        <label for="submit-post">
+                          <% if model.new_record? %>
+                              <input type="checkbox" name="submit-post" id="submit-post" required>
+                              By click you must agree with <a href="#">our  Terms &amp; Condition</a> and
+                              <a href="#">Posting Rules</a>.
+                          <% end %>
+                        </label>
+                      </div>
+                      <div class="submit-button">
+                        <button class="btn btn-primary" type="submit">Post your ad</button>
                       </div>
                     </div>
-                  </div><!-- post-inner -->
-                </div>
-              </div>
-            </div><!-- product-section -->
-
-            <div class="seller-section avtpost-fields">
-              <div class="row">
-                <div class="col-xs-12">
-                  <h3>Seller Information</h3>
-                </div>
-                <div class="col-md-6">
-                  <div class="post-inner">
-                    <div class="row form-group">
-                      <label class="col-md-4">Contact Name: </label>
-                      <div class="col-md-8">
-                        <%= text_field_tag 'name', current_user.full_name, disabled: true, class: 'form-control' %>
-                      </div>
-                    </div>
-                  </div><!-- post-inner -->
-                </div>
-                <div class="col-md-6">
-                  <div class="post-inner">
-                    <div class="row form-group">
-                      <label class="col-md-4">Contact Email: </label>
-                      <div class="col-md-8">
-                        <%= text_field_tag 'email', current_user.email, disabled: true, class: 'form-control' %>
-                      </div>
-                    </div>
-                  </div><!-- post-inner -->
-                </div>
-                <div class="col-md-6">
-                  <div class="post-inner">
-                    <div class="row form-group">
-                      <label class="col-md-4">Contact Number: </label>
-                      <div class="col-md-8">
-                        <%= text_field_tag 'phone', current_user.profileable.contact_numbers.length > 0 ? current_user.profileable.contact_numbers.first.text_value : '', disabled: true, class: 'form-control' %>
-                      </div>
-                    </div>
-                  </div><!-- post-inner -->
-                </div>
-                <div class="col-md-6">
-                  <div class="post-inner">
-                    <div class="row form-group">
-                      <label class="col-md-4">Your Address: </label>
-                      <div class="col-md-8">
-                        <%= text_field_tag 'address', current_user.profileable.location.name, disabled: true, class: 'form-control' %>
-                      </div>
-                    </div>
-                  </div><!-- post-inner -->
-                </div>
-              </div>
-            </div><!-- seller-section -->
-
-            <div class="submit-section">
-              <div class="ad-condition checkbox">
-                <label for="submit-post">
-                  <input type="checkbox" name="submit-post" id="submit-post">
-                  By click you must agree with <a href="#">our  Terms &amp; Condition</a> and
-                    <a href="#">Posting Rules</a>.
-                </label>
-              </div>
-              <div class="submit-button">
-                <button class="btn btn-primary" type="submit">Post your ad</button>
-              </div>
+                  </fieldset>
+              <% end %>
             </div>
-          </fieldset>
-        <% end %>
+          </div>
+        </div>
       </div>
-    </div>
-  </div> <!-- avt-post -->
-  </div>	<!-- page -->
-<% end %>
+  <% end %>
+</div>

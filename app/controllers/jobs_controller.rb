@@ -61,6 +61,13 @@ class JobsController < ApplicationController
     end
   end
 
+  def delete_picture
+    if params[:attachment_id]
+      attachment = Attachment.find_by_id params[:attachment_id]
+      attachment.destroy if attachment
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_job

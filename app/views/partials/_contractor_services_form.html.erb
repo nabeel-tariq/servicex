@@ -19,7 +19,7 @@
         </div>
       <% end %>
 
-      <%profile.contractor_services.map &:initialize_nested%>
+      <% profile.contractor_services.map &:initialize_nested%>
       <% profile.contractor_services.each do |c_service|%>
         <button class="accordion"><%=c_service.service.name%></button>
         <div class="panel">

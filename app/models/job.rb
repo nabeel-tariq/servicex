@@ -25,7 +25,11 @@ class Job < ApplicationRecord
   end
 
   def latest_image
-    attachments.present? ? attachments.last.document.url(:thumb) : "#{APP_URL}/images/missing.png"
+    attachments.present? ? attachments.last.document.url(:small) : "#{APP_URL}/images/missing.png"
+  end
+
+  def total_images_count
+    attachments.length > 0 ? attachments.count : 0
   end
 
 end

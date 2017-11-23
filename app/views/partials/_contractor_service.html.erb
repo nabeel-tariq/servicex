@@ -5,8 +5,8 @@
       <%= f.fields_for :locations do |location_fields| %>
           <%= location_fields.hidden_field :latitude, autofocus: true , :class => 'form-control', :required => true, id: "latitude_field_#{location_fields.object.id}" %>
           <%= location_fields.hidden_field :longitude, autofocus: true , :class => 'form-control', :required => true, id: "longitude_field_#{location_fields.object.id}"%>
-          <%= location_fields.text_field :name, autofocus: true , :class => 'form-control google_map' ,latitude_field: "#latitude_field_#{location_fields.object.id}" , longitude_field: "#longitude_field_#{location_fields.object.id}" ,callback: "f=function (data){console.log(data)};", 'data-parsley-required': "true", id: 'searchTextField' %>
-          <%= location_fields.text_field :radius, autofocus: true , :class => 'form-control', 'data-parsley-required': "true", id: 'radius', placeholder: 'Enter Radius' %>
+          <%= location_fields.text_field :name, autofocus: true , :class => 'form-control google_map' ,latitude_field: "#latitude_field_#{location_fields.object.id}" , longitude_field: "#longitude_field_#{location_fields.object.id}" ,callback: "f=function (data){console.log(data)};", 'data-parsley-required': "true", id: 'searchTextField','data-parsley-trigger': "change" %>
+          <%= location_fields.text_field :radius, autofocus: true , :class => 'form-control', 'data-parsley-required': "true", id: 'radius', placeholder: 'Enter Radius','data-parsley-trigger': "change" %>
       <% end %>
     </div>
   </div>

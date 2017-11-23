@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   resources :technicians
   resources :orders
   resources :biddings
-  resources :jobs
+  resources :jobs do
+      get :delete_picture, :on => :collection, :action => 'delete_picture'
+  end
   resources :contractors
   resources :contractor_services
   resources :employers

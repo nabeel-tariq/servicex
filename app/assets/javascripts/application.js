@@ -23,11 +23,17 @@
 //= require nested_form_fields
 //= require owl.carousel.min
 //= require parsley
+//= require jquery.datetimepicker
 
 $(document).ready(function() {
     // google.maps.event.addDomListener(window, 'load', initialize);
     initialize(".google_map");
     $('select.select2').select2({width: "100%"});
+    var current_date = new Date().toJSON().slice(0,10).replace(/-/g,'/')
+    $('.datetimepicker').datetimepicker({
+        minDate: current_date
+    });
+
 });
 
 function show_hide_technician_form(){

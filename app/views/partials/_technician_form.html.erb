@@ -19,7 +19,7 @@
                       <div class="row form-group">
                         <label class="col-md-4">First Name: </label>
                         <div class="col-md-8">
-                          <%= f.text_field :first_name, autofocus: true , :class => 'form-control', 'data-parsley-pattern': "/^[a-zA-Z]+$/" ,'data-parsley-required': "true", placeholder: ""%>
+                          <%= f.text_field :first_name, autofocus: true , :class => 'form-control', 'data-parsley-pattern': "/^[a-zA-Z]+$/" ,'data-parsley-required': "true",'data-parsley-trigger': "change", placeholder: ""%>
                         </div>
                       </div>
                     </div>
@@ -29,7 +29,7 @@
                       <div class="row form-group">
                         <label class="col-md-4">Last Name: </label>
                         <div class="col-md-8">
-                          <%= f.text_field :last_name, autofocus: true , :class => 'form-control', 'data-parsley-pattern': "/^[a-zA-Z]+$/" ,'data-parsley-required': "true", placeholder: ""%>
+                          <%= f.text_field :last_name, autofocus: true , :class => 'form-control', 'data-parsley-pattern': "/^[a-zA-Z]+$/" ,'data-parsley-required': "true",'data-parsley-trigger': "change",placeholder: ""%>
                         </div>
                       </div>
                     </div>
@@ -43,7 +43,7 @@
                           <div class="row form-group">
                             <label class="col-md-4">Cell No: </label>
                             <div class="col-md-8">
-                              <%= contact_fields.text_field :text_value, autofocus: true , :class => 'form-control','data-parsley-required': "true",'data-parsley-type': "number", value: profile.contact_numbers.first.text_value %>
+                              <%= contact_fields.text_field :text_value, autofocus: true , :class => 'form-control','data-parsley-required': "true",'data-parsley-trigger': "change",'data-parsley-type': "number", value: profile.contact_numbers.first.text_value %>
                             </div>
                           </div>
                         </div>
@@ -77,7 +77,7 @@
                             <div class="col-md-8">
                               <%= location_fields.hidden_field :latitude,id: "latitude_field_#{location_fields.object.id}" %>
                               <%= location_fields.hidden_field :longitude, id: "longitude_field_#{location_fields.object.id}" %>
-                              <%= location_fields.text_field :name, autofocus: true ,'data-parsley-required': "true", latitude_field: "#latitude_field_#{location_fields.object.id}" , longitude_field: "#longitude_field_#{location_fields.object.id}" , :class => 'form-control google_map', id: 'searchTextField2' %>
+                              <%= location_fields.text_field :name, autofocus: true ,'data-parsley-required': "true", 'data-parsley-trigger': "change",latitude_field: "#latitude_field_#{location_fields.object.id}" , longitude_field: "#longitude_field_#{location_fields.object.id}" , :class => 'form-control google_map', id: 'searchTextField2' %>
                             </div>
                           </div>
                         </div>
@@ -87,7 +87,7 @@
                           <div class="row form-group">
                             <label class="col-md-4">Address 1</label>
                             <div class="col-md-8">
-                              <%= location_fields.text_field :address_1, autofocus: true , :class => 'form-control', 'data-parsley-required': "true" %>
+                              <%= location_fields.text_field :address_1, autofocus: true , :class => 'form-control', 'data-parsley-required': "true",'data-parsley-trigger': "change" %>
                             </div>
                           </div>
                         </div>
@@ -118,7 +118,7 @@
                               <div class="row form-group">
                                 <label class="col-md-4">Contact No</label>
                                 <div class="col-md-8">
-                                  <%= location_contact_numbers_fields.text_field :text_value, autofocus: true , :class => 'form-control','data-parsley-required': "true", 'data-parsley-type': "number" %>
+                                  <%= location_contact_numbers_fields.text_field :text_value, autofocus: true , :class => 'form-control', 'data-parsley-type': "number" %>
                                 </div>
                               </div>
                             </div>
