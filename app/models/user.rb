@@ -10,20 +10,6 @@ class User < ApplicationRecord
   enum account_stage: {incomplete: 0, complete: 1}
   after_create :handle_profileables
 
-  def self.create_from_provider_data(provider_data)
-    where(provider: provider_data.provider, uid: provider_data.uid).first_or_create! do | user |
-      if user.profileable_type.present?
-      else
-        employer = Employer.create(first_name: provider_data.info.name.split[0], last_name: provider_data.info.name.split[1], is_active: true)
-        user.profileable_type = 'Employer'
-        user.profileable_id = employer.id
-      end
-      user.email = provider_data.info.email
-      user.password = Devise.friendly_token[0, 20]
-      #user.skip_confirmation!
-    end
-  end
-
   def handle_profileables
     employer = Employer.create(first_name: self.first_name, last_name: self.last_name)
     contractor = Contractor.create(first_name: self.first_name, last_name: self.last_name)
@@ -32,16 +18,6 @@ class User < ApplicationRecord
 
   def full_name
     "#{self.first_name} #{self.last_name}".titleize
-  end
-
-  def is_employer?
-    return true if self.profileable_type == 'Employer'
-    return false
-  end
-
-  def is_contractor?
-    return true if self.profileable_type == 'Contractor'
-    return false
   end
 
   def apply_omniauth(omniauth)
