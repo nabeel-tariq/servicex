@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,:omniauthable, omniauth_providers: [:facebook, :google_oauth2]
   belongs_to :profileable, polymorphic: true
+  has_many :authentications
   enum account_stage: {incomplete: 0, complete: 1}
 
   def self.create_from_provider_data(provider_data)
@@ -33,5 +34,23 @@ class User < ApplicationRecord
   def is_contractor?
     return true if self.profileable_type == 'Contractor'
     return false
+  end
+
+  def apply_omniauth(omniauth)
+    authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
+  end
+
+  def password_required?
+    (authentications.empty? || !password.blank?) && super
+  end
+
+  def existing_auth_providers
+    ps = self.authentications.all
+
+    if ps.size > 0
+      return ps.map(&:provider)
+    else
+      return []
+    end
   end
 end

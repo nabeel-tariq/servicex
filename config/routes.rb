@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :registrations => 'registrations',
                                        omniauth_callbacks: 'users/omniauth'
   }
+  post '/auth/:provider/callback' => 'authentications#create'
   resources :users
   resources :technicians
   resources :orders

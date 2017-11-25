@@ -9,7 +9,7 @@ class RegistrationsController < Devise::RegistrationsController
     resource.profileable = child_class.new(first_name: resource.first_name, last_name: resource.last_name)
     valid = resource.valid?
     valid = resource.profileable.valid? && valid
-
+    session[:omniauth] = nil unless resource.new_record?
     if valid && resource.save!
       yield resource if block_given?
       if resource.persisted?
@@ -39,5 +39,15 @@ class RegistrationsController < Devise::RegistrationsController
     clean_up_passwords resource
     set_minimum_password_length
     respond_with resource
+  end
+
+  private
+
+  def build_resource(*args)
+    super
+    if session[:omniauth]
+      @user.apply_omniauth(session[:omniauth])
+      @user.valid?
+    end
   end
 end
