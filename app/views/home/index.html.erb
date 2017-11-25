@@ -62,48 +62,7 @@
   </div><!-- #home-section -->
 
   <div id="search-section">
-    <div class="container">
-      <form action="#">
-        <div class="search-section">
-          <ul>
-            <li>
-              <div class="dropdown category-dropdown">
-                <a data-toggle="dropdown" href="#"><span class="change-text">All Categories</span> <i class="fa fa-angle-down"></i></a>
-                <ul class="dropdown-menu category-change">
-                  <li><a href="#">Art & Entertainment</a></li>
-                  <li><a href="#">Cars & Vehicles</a></li>
-                  <li><a href="#">Sports & Games</a></li>
-                  <li><a href="#">Electronics</a></li>
-                  <li><a href="#">Real Estate</a></li>
-                  <li><a href="#">Jobs</a></li>
-                  <li><a href="#">Megazine</a></li>
-                </ul>
-              </div><!-- category-change -->
-            </li>
-            <li>
-              <div class="dropdown category-dropdown">
-                <a data-toggle="dropdown" href="#"><span class="change-text">All Locations</span> <i class="fa fa-angle-down"></i></a>
-                <ul class="dropdown-menu category-change">
-                  <li><a href="#">Australia</a></li>
-                  <li><a href="#">Argentina</a></li>
-                  <li><a href="#">Belgium</a></li>
-                  <li><a href="#">Brazil</a></li>
-                  <li><a href="#">Canada</a></li>
-                  <li><a href="#">China</a></li>
-                  <li><a href="#">France</a></li>
-                </ul>
-              </div><!-- category-change -->
-            </li>
-            <li>
-              <input type="text" class="form-control" placeholder="What are you looking for ?">
-            </li>
-            <li>
-              <button type="submit" class="form-control btn btn-primary" value="Search">Search</button>
-            </li>
-          </ul>
-        </div>
-      </form>
-    </div>
+    <%= render partial: "partials/search_filters" %>
   </div>
   <!-- search-section -->
 

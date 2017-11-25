@@ -5,4 +5,8 @@ class Service < ApplicationRecord
   has_many :contractors, through: :contractor_services
   has_many :jobs_services, dependent: :destroy
   has_many :jobs, through: :jobs_services
+
+  def self.all_services
+    self.order(:name)
+  end
 end

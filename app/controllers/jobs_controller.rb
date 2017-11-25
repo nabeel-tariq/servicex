@@ -1,6 +1,6 @@
 class JobsController < ApplicationController
   before_action :set_job, only: [:show, :edit, :update, :destroy]
-  before_action :set_employer
+  before_action :set_employer, except: [:search_jobs]
 
   # GET /jobs
   # GET /jobs.json
@@ -68,6 +68,10 @@ class JobsController < ApplicationController
     end
   end
 
+  def search_jobs
+    debugger
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_job
@@ -83,6 +87,6 @@ class JobsController < ApplicationController
     end
 
   def set_employer
-    @employer = current_user.profileable
+    @employer = current_user.employer
   end
 end

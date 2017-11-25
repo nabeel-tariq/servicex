@@ -1,0 +1,35 @@
+<div class="container">
+  <%= form_tag search_jobs_jobs_path, :method => 'get' do %>
+      <div class="search-section">
+        <ul class="d-iblock ul-row pb col-sm-3 pr0 pl0">
+          <li class="col-sm-3">
+            <%= select_tag :services,options_from_collection_for_select(Service.all_services,:id,:name),multiple: :true ,class: "form-control sumoSelect"%>
+          </li>
+          <li class="col-sm-3">
+            <%= text_field_tag :name,"",class: 'google_map form-control' %>
+          </li>
+          <li class="col-sm-3">
+            <%= text_field_tag :open_text,"",class: 'form-control', placeholder: "What are you looking for ?" %>
+          </li>
+          <li class="col-sm-3">
+            <%= submit_tag "Search", class: "btn btn-primary form-control", style: "background-color: #00a651"; %>
+          </li>
+        </ul>
+        <ul class="d-iblock ul-row pb col-sm-12 pr0 pl0">
+          <li class="col-sm-3">
+            <%= select_tag :ad_type,options_for_select(["All Jobs","Bussiness", "Personal"], "All Jobs"),class: "form-control"%>
+          </li>
+          <li class="col-sm-3">
+            <div class="dropdown category-dropdown">
+            </div>
+          </li>
+          <li class="col-sm-3">
+            <%= number_field_tag :budget_from,"",class: 'form-control', placeholder: "Budget From" %>
+          </li>
+          <li class="col-sm-3">
+            <%= number_field_tag :budget_to,"",class: 'form-control', placeholder: "Budget To" %>
+          </li>
+        </ul>
+      </div>
+  <% end %>
+</div>

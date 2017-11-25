@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   resources :orders
   resources :biddings
   resources :jobs do
+    collection do
+      get :search_jobs
+    end
       get :delete_picture, :on => :collection, :action => 'delete_picture'
   end
   resources :contractors
