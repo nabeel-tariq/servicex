@@ -8,6 +8,7 @@ class User < ApplicationRecord
   #belongs_to :profileable, polymorphic: true
   has_many :authentications
   enum account_stage: {incomplete: 0, complete: 1}
+  after_create :handle_profileables
 
   def self.create_from_provider_data(provider_data)
     where(provider: provider_data.provider, uid: provider_data.uid).first_or_create! do | user |
@@ -21,6 +22,12 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0, 20]
       #user.skip_confirmation!
     end
+  end
+
+  def handle_profileables
+    employer = Employer.create(first_name: self.first_name, last_name: self.last_name)
+    contractor = Contractor.create(first_name: self.first_name, last_name: self.last_name)
+    self.update(contractor_id: contractor.id,employer_id: employer.id) if employer && contractor
   end
 
   def full_name

@@ -5,12 +5,11 @@ class RegistrationsController < Devise::RegistrationsController
 
   def create
     build_resource(sign_up_params)
-
-    debugger
-    contractor = Contractor.create(first_name: resource.first_name, last_name: resource.last_name)
-    employer = Employer.create(first_name: resource.first_name, last_name: resource.last_name)
-
-    resource.update(employer_id: employer.id, contractor_id: contractor.id) if contractor && employer
+    # contractor = Contractor.create(first_name: resource.first_name, last_name: resource.last_name)
+    # employer = Employer.create(first_name: resource.first_name, last_name: resource.last_name)
+    #
+    # resource.update(employer_id: employer.id, contractor_id: contractor.id) if contractor && employer
+    #
     valid = resource.valid?
     session[:omniauth] = nil unless resource.new_record?
     if valid && resource.save!
