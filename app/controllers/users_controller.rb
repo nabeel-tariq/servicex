@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!, only: [:update_user_profile]
 
   # GET /users
   # GET /users.json
@@ -59,6 +60,15 @@ class UsersController < ApplicationController
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def update_user_profile
+    if params[:is_employer] =~ /false/
+      current_user.update(is_employer: params[:is_employer])
+    else
+      current_user.update(is_employer: true)
+    end
+    redirect_to root_path
   end
 
   private

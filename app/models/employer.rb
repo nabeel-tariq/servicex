@@ -4,7 +4,7 @@ class Employer < ApplicationRecord
   has_many :jobs, dependent: :destroy
 
   has_one :location, as: :locationable, dependent: :destroy
-  has_one :user, as: :profileable, dependent: :destroy
+  has_one :user, dependent: :destroy
 
   accepts_nested_attributes_for :user
   accepts_nested_attributes_for :contact_numbers , reject_if: proc { |attributes| attributes[:text_value].blank? }

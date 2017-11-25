@@ -3,7 +3,9 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,:omniauthable, omniauth_providers: [:facebook, :google_oauth2]
-  belongs_to :profileable, polymorphic: true
+  has_one :contractor
+  has_one :employer
+  #belongs_to :profileable, polymorphic: true
   has_many :authentications
   enum account_stage: {incomplete: 0, complete: 1}
 
@@ -23,7 +25,6 @@ class User < ApplicationRecord
 
   def full_name
     "#{self.first_name} #{self.last_name}".titleize
-    "#{self.profileable.first_name} #{self.profileable.last_name}".titleize if self.profileable
   end
 
   def is_employer?

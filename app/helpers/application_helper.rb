@@ -15,7 +15,7 @@ module ApplicationHelper
   end
 
   def url_mapping user
-    url_path =user.profileable_type == 'Employer' ? edit_employer_path(user.profileable_id) : edit_contractor_path(user.profileable_id) if user
+    url_path =user.is_employer == true ? edit_employer_path(user.employer_id) : edit_contractor_path(user.contractor_id) if user
     url_path
   end
   

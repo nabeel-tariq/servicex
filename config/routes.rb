@@ -4,7 +4,11 @@ Rails.application.routes.draw do
                                        omniauth_callbacks: 'users/omniauth'
   }
   post '/auth/:provider/callback' => 'authentications#create'
-  resources :users
+  resources :users do
+    collection do
+      get :update_user_profile
+    end
+  end
   resources :technicians
   resources :orders
   resources :biddings

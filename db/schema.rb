@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171125062335) do
+ActiveRecord::Schema.define(version: 20171125121050) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -232,20 +232,25 @@ ActiveRecord::Schema.define(version: 20171125062335) do
     t.string   "last_name"
     t.string   "profileable_type"
     t.integer  "profileable_id"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.string   "email",                  default: "",   null: false
+    t.string   "encrypted_password",     default: "",   null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,    null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
     t.integer  "account_stage",          default: 0
+    t.integer  "employer_id"
+    t.integer  "contractor_id"
+    t.boolean  "is_employer",            default: true
+    t.index ["contractor_id"], name: "index_users_on_contractor_id", using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["employer_id"], name: "index_users_on_employer_id", using: :btree
     t.index ["profileable_type", "profileable_id"], name: "index_users_on_profileable_type_and_profileable_id", using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
@@ -267,4 +272,6 @@ ActiveRecord::Schema.define(version: 20171125062335) do
   add_foreign_key "technician_orders", "orders"
   add_foreign_key "technician_orders", "technicians"
   add_foreign_key "technicians", "contractors"
+  add_foreign_key "users", "contractors"
+  add_foreign_key "users", "employers"
 end
