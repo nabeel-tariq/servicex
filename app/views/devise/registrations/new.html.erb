@@ -5,27 +5,6 @@
           <div class="row">
             <div class="col-md-4 col-md-offset-4">
               <div class="user-form">
-                  <div class="post-inner choose-options">
-                    <div class="row form-group">
-                      <label class="col-md-12">User Type: </label>
-                      <div class="col-md-12">
-                        <div class="row">
-                          <div class="col-md-6">
-                            <div class="choose-option">
-                              <%= f.radio_button :profileable_type, 'employer', :checked => true %>
-                              <label for="employer">Employer</label>
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="choose-option">
-                              <%= f.radio_button :profileable_type, 'contractor' %>
-                              <label for="contractor">Merchant</label>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                   <div class="form-group">
                     <%= f.hidden_field :account_stage, :value => "incomplete"%>
                     <%= f.text_field :first_name, autofocus: true , :class => 'form-control', 'data-parsley-pattern': "/^[a-zA-Z]+$/" ,'data-parsley-required': "true", placeholder: "First Name",'data-parsley-trigger': "change"%>
@@ -47,6 +26,6 @@
             </div>
           </div>
         </div>
-      </div> <!-- ad-post -->
-    </div>	<!-- page -->
+      </div>
+    </div>
 <% end %>

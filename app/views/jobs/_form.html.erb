@@ -176,7 +176,7 @@
                             <div class="row form-group">
                               <label class="col-md-4">Contact Number: </label>
                               <div class="col-md-8">
-                                <%= text_field_tag 'phone', current_user.profileable.contact_numbers.length > 0 ? current_user.profileable.contact_numbers.first.text_value : '', disabled: true, class: 'form-control' %>
+                                <%= text_field_tag 'phone', current_user.employer.contact_numbers.length > 0 ? current_user.profileable.contact_numbers.first.text_value : '', disabled: true, class: 'form-control' %>
                               </div>
                             </div>
                           </div><!-- post-inner -->
@@ -186,7 +186,7 @@
                             <div class="row form-group">
                               <label class="col-md-4">Your Address: </label>
                               <div class="col-md-8">
-                                <%= text_field_tag 'address', current_user.profileable.location.name, disabled: true, class: 'form-control' %>
+                                <%= text_field_tag 'address', current_user.employer.location.name, disabled: true, class: 'form-control' %>
                               </div>
                             </div>
                           </div><!-- post-inner -->
