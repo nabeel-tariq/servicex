@@ -3,8 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,:omniauthable, omniauth_providers: [:facebook, :google_oauth2]
-  has_one :contractor
-  has_one :employer
+  belongs_to :contractor
+  belongs_to :employer
   #belongs_to :profileable, polymorphic: true
   has_many :authentications
   enum account_stage: {incomplete: 0, complete: 1}

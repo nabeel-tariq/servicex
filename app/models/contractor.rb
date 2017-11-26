@@ -8,7 +8,7 @@ class Contractor < ApplicationRecord
   has_and_belongs_to_many :biddings
 
   has_one :location, as: :locationable, dependent: :destroy
-  has_one :user, as: :profileable, dependent: :destroy
+  has_one :user, dependent: :destroy
 
   accepts_nested_attributes_for :user
   accepts_nested_attributes_for :contact_numbers

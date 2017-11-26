@@ -3,10 +3,10 @@
       <div class="search-section">
         <ul class="d-iblock ul-row pb col-sm-3 pr0 pl0">
           <li class="col-sm-3">
-            <%= select_tag :services,options_from_collection_for_select(Service.all_services,:id,:name),multiple: :true ,class: "form-control sumoSelect"%>
+            <%= select_tag "services[]",options_from_collection_for_select(Service.all_services,:id,:name),multiple: :true ,class: "form-control sumoSelect"%>
           </li>
           <li class="col-sm-3">
-            <%= text_field_tag :name,"",class: 'google_map form-control' %>
+            <%= text_field_tag :area,"",class: 'google_map form-control' %>
           </li>
           <li class="col-sm-3">
             <%= text_field_tag :open_text,"",class: 'form-control', placeholder: "What are you looking for ?" %>

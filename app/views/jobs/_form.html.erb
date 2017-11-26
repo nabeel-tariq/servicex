@@ -35,9 +35,9 @@
                               <label class="col-md-4">Location: </label>
                               <div class="col-md-8">
                                 <%= f.fields_for :location do |location_fields| %>
-                                    <%= location_fields.text_field :name, autofocus: true , :class => 'form-control google_map','data-parsley-required': "true", id: 'searchTextField' %>
-                                    <%= location_fields.hidden_field :latitude, :value => '' %>
-                                    <%= location_fields.hidden_field :longitude, :value => '' %>
+                                    <%= location_fields.hidden_field :latitude,id: "latitude_field_#{location_fields.object.id}" %>
+                                    <%= location_fields.hidden_field :longitude, id: "longitude_field_#{location_fields.object.id}" %>
+                                    <%= location_fields.text_field :name, autofocus: true, latitude_field: "#latitude_field_#{location_fields.object.id}" , longitude_field: "#longitude_field_#{location_fields.object.id}" , :class => 'form-control google_map','data-parsley-required': "true", id: 'searchTextField' %>
                                 <% end %>
                               </div>
                             </div>
@@ -176,7 +176,7 @@
                             <div class="row form-group">
                               <label class="col-md-4">Contact Number: </label>
                               <div class="col-md-8">
-                                <%= text_field_tag 'phone', current_user.employer.contact_numbers.length > 0 ? current_user.profileable.contact_numbers.first.text_value : '', disabled: true, class: 'form-control' %>
+                                <%= text_field_tag 'phone', current_user.employer.contact_numbers.length > 0 ? current_user.employer.contact_numbers.first.text_value : '', disabled: true, class: 'form-control' %>
                               </div>
                             </div>
                           </div><!-- post-inner -->

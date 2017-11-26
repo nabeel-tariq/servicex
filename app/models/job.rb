@@ -32,4 +32,6 @@ class Job < ApplicationRecord
     attachments.length > 0 ? attachments.count : 0
   end
 
+    #Job.joins(:location).where('earth_box(ll_to_earth(?, ?), 5000)@> ll_to_earth(latitude, longitude)',lt.latitude, lt.longitude)
+
 end
