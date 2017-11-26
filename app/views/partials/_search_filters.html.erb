@@ -6,7 +6,9 @@
             <%= select_tag "services[]",options_from_collection_for_select(Service.all_services,:id,:name),multiple: :true ,class: "form-control sumoSelect"%>
           </li>
           <li class="col-sm-3">
-            <%= text_field_tag :area,"",class: 'google_map form-control' %>
+            <%= hidden_field_tag :latitude,"", id: "latitude_field_job" %>
+            <%= hidden_field_tag :longitude,"", id: "longitude_field_job" %>
+            <%= text_field_tag :area,"",class: 'google_map form-control',latitude_field: "#latitude_field_job" , longitude_field: "#longitude_field_job" %>
           </li>
           <li class="col-sm-3">
             <%= text_field_tag :open_text,"",class: 'form-control', placeholder: "What are you looking for ?" %>
@@ -20,14 +22,24 @@
             <%= select_tag :ad_type,options_for_select(["All Jobs","Bussiness", "Personal"], "All Jobs"),class: "form-control"%>
           </li>
           <li class="col-sm-3">
-            <div class="dropdown category-dropdown">
-            </div>
-          </li>
-          <li class="col-sm-3">
             <%= number_field_tag :budget_from,"",class: 'form-control', placeholder: "Budget From" %>
           </li>
           <li class="col-sm-3">
             <%= number_field_tag :budget_to,"",class: 'form-control', placeholder: "Budget To" %>
+          </li>
+          <li class="col-sm-3">
+            <div class="col-md-6">
+              <div class="choose-option">
+                <%= radio_button_tag :ad_type, '1' %>
+                <label for="personal">Images</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="choose-option">
+                <%= radio_button_tag :ad_type, '0' %>
+                <label for="business">No Images</label>
+              </div>
+            </div>
           </li>
         </ul>
       </div>
