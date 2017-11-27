@@ -10,6 +10,7 @@ class Job < ApplicationRecord
   belongs_to :employer
 
   enum ad_type: {personal: 0, business: 1}
+  enum status: {active: 0, inactive: 1}
 
   accepts_nested_attributes_for :attachments
   accepts_nested_attributes_for :location
@@ -32,6 +33,18 @@ class Job < ApplicationRecord
     attachments.length > 0 ? attachments.count : 0
   end
 
-    #Job.joins(:location).where('earth_box(ll_to_earth(?, ?), 5000)@> ll_to_earth(latitude, longitude)',lt.latitude, lt.longitude)
+  private
+  def self.set_search_params options, params
+    # Handle Default Values
+    radius = params[:radius].present? ? "#{params[:radius].to_i*1000}" : 5000
 
+    options[:conditions].deep_merge!(ad_type: params[:ad_type]) if params[:ad_type].present? && params[:ad_type] != "All"
+    options[:conditions].deep_merge!(open_text: params[:open_text]) if params[:open_text].present?
+    options[:conditions].deep_merge!(:services => {id: params[:services]}) if params[:services].present?
+    options[:raw_conditions] << ["budget >=#{params[:budget_from]}"] if params[:budget_from].present?
+    options[:raw_conditions] << ["budget <=#{params[:budget_to]}"] if params[:budget_to].present?
+    options[:raw_conditions] << ["earth_box(ll_to_earth(#{params[:latitude]}, #{params[:longitude]}), #{radius})@> ll_to_earth(latitude, longitude)"] if params[:latitude].present? && params[:longitude].present?
+    options[:raw_conditions] = [options[:raw_conditions].map(&:first).join(' AND '),options[:raw_conditions].map(&:last)]
+    options[:attachment_joins] = [:attachments] if params[:with_images].present?
+  end
 end

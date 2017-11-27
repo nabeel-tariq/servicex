@@ -1,14 +1,12 @@
-<div class="container">
   <%= form_tag search_jobs_jobs_path, :method => 'get' do %>
-      <div class="search-section">
         <ul class="d-iblock ul-row pb col-sm-3 pr0 pl0">
           <li class="col-sm-3">
-            <%= select_tag "services[]",options_from_collection_for_select(Service.all_services,:id,:name),multiple: :true ,class: "form-control sumoSelect"%>
+            <%= select_tag "services[]",options_from_collection_for_select(Service.all_services,:id,:name,params[:services]),multiple: :true ,class: "form-control sumoSelect"%>
           </li>
           <li class="col-sm-3">
             <%= hidden_field_tag :latitude,"", id: "latitude_field_job" %>
             <%= hidden_field_tag :longitude,"", id: "longitude_field_job" %>
-            <%= text_field_tag :area,"",class: 'google_map form-control',latitude_field: "#latitude_field_job" , longitude_field: "#longitude_field_job" %>
+            <%= text_field_tag :area, params[:area] ,class: 'google_map form-control',latitude_field: "#latitude_field_job" , longitude_field: "#longitude_field_job" %>
           </li>
           <li class="col-sm-3">
             <%= text_field_tag :open_text,"",class: 'form-control', placeholder: "What are you looking for ?" %>
@@ -19,29 +17,26 @@
         </ul>
         <ul class="d-iblock ul-row pb col-sm-12 pr0 pl0">
           <li class="col-sm-3">
-            <%= select_tag :ad_type,options_for_select(["All Jobs","Bussiness", "Personal"], "All Jobs"),class: "form-control"%>
+            <%= select_tag :ad_type,options_for_select(["All","business", "personal"], params[:ad_type]),class: "form-control"%>
           </li>
           <li class="col-sm-3">
-            <%= number_field_tag :budget_from,"",class: 'form-control', placeholder: "Budget From" %>
+            <%= number_field_tag :budget_from,params[:budget_from],class: 'form-control', placeholder: "Budget From" %>
           </li>
           <li class="col-sm-3">
-            <%= number_field_tag :budget_to,"",class: 'form-control', placeholder: "Budget To" %>
+            <%= number_field_tag :budget_to,params[:budget_to],class: 'form-control', placeholder: "Budget To" %>
           </li>
           <li class="col-sm-3">
-            <div class="col-md-6">
+            <%= number_field_tag :radius,params[:radius],class: 'form-control', placeholder: "Distance e.g 5" %>
+          </li>
+        </ul>
+        <ul class="d-iblock ul-row pb col-sm-12 pr0 pl0">
+          <li class="col-sm-3">
+            <div class="col-md-8 pl0">
               <div class="choose-option">
-                <%= radio_button_tag :ad_type, '1' %>
-                <label for="personal">Images</label>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="choose-option">
-                <%= radio_button_tag :ad_type, '0' %>
-                <label for="business">No Images</label>
+                <%= check_box_tag :with_images, '1', params[:with_images].present?, id: 'with_images' %>
+                <label for="with_images">With Images</label>
               </div>
             </div>
           </li>
         </ul>
-      </div>
   <% end %>
-</div>

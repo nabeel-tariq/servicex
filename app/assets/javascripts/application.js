@@ -33,7 +33,9 @@ $(document).ready(function() {
     $('.datetimepicker').datetimepicker({
         minDate: current_date
     });
-    $('.sumoSelect').SumoSelect();
+    $('.sumoSelect').SumoSelect({
+        search: true
+    });
 
 });
 
