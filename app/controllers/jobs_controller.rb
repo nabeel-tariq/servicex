@@ -72,7 +72,12 @@ class JobsController < ApplicationController
     options = { sort: "jobs.updated_at desc", conditions: {status: 0},attachment_joins: {}, raw_conditions:[], not_conditions: {}, exclusive_conditions: {},
                 joins: [:location,jobs_services: [:service]] }
     Job.set_search_params options, params
-    search_results = Job.left_joins(options[:joins]).joins(options[:attachment_joins]).where(options[:conditions]).where(options[:raw_conditions])
+    if params[:open_text].present?
+      search_results = Job.search_name(params[:open_text]).left_joins(options[:joins]).joins(options[:attachment_joins]).where(options[:conditions]).where(options[:raw_conditions])
+    else
+      search_results = Job.left_joins(options[:joins]).joins(options[:attachment_joins]).where(options[:conditions]).where(options[:raw_conditions])
+    end
+
     @job_search_results = search_results.compact.uniq
   end
 

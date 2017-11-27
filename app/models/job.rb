@@ -18,6 +18,13 @@ class Job < ApplicationRecord
 
   validates_presence_of :name, :description, :employer_id
 
+  include PgSearch
+  pg_search_scope :search_name, :against => [:name,:budget,:description,:ad_type], :using => { :tsearch => {:prefix => true} },
+      :associated_against => {
+          :services => [:name],
+          :location => :name
+      }
+
   def initialize_nested_attributes
     self.attachments.length > 0 ? self.attachments : self.attachments.build
     self.location ||= Location.new
@@ -39,7 +46,6 @@ class Job < ApplicationRecord
     radius = params[:radius].present? ? "#{params[:radius].to_i*1000}" : 5000
 
     options[:conditions].deep_merge!(ad_type: params[:ad_type]) if params[:ad_type].present? && params[:ad_type] != "All"
-    options[:conditions].deep_merge!(open_text: params[:open_text]) if params[:open_text].present?
     options[:conditions].deep_merge!(:services => {id: params[:services]}) if params[:services].present?
     options[:raw_conditions] << ["budget >=#{params[:budget_from]}"] if params[:budget_from].present?
     options[:raw_conditions] << ["budget <=#{params[:budget_to]}"] if params[:budget_to].present?

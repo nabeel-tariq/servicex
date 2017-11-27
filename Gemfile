@@ -36,6 +36,7 @@ gem 'omniauth-google-oauth2', '~> 0.4.1'
 gem 'activerecord-session_store', '~> 1.0'
 gem "parsley-rails"
 gem 'jquery-datetimepicker-rails'
+gem 'pg_search'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password

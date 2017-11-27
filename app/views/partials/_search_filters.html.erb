@@ -9,7 +9,7 @@
             <%= text_field_tag :area, params[:area] ,class: 'google_map form-control',latitude_field: "#latitude_field_job" , longitude_field: "#longitude_field_job" %>
           </li>
           <li class="col-sm-3">
-            <%= text_field_tag :open_text,"",class: 'form-control', placeholder: "What are you looking for ?" %>
+            <%= text_field_tag :open_text,params[:open_text],class: 'form-control', placeholder: "What are you looking for ?" %>
           </li>
           <li class="col-sm-3">
             <%= submit_tag "Search", class: "btn btn-primary form-control", style: "background-color: #00a651"; %>

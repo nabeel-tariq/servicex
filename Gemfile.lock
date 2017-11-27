@@ -154,6 +154,10 @@ GEM
     parsley-rails (2.7.0.0)
       railties (>= 3.0.0)
     pg (0.21.0)
+    pg_search (2.1.1)
+      activerecord (>= 4.2)
+      activesupport (>= 4.2)
+      arel (>= 6)
     puma (3.10.0)
     rack (2.0.3)
     rack-test (0.6.3)
@@ -255,6 +259,7 @@ DEPENDENCIES
   paperclip (~> 5.0.0)
   parsley-rails
   pg (~> 0.18)
+  pg_search
   puma (~> 3.0)
   rails (~> 5.0.3)
   sass-rails (~> 5.0)
