@@ -1,3 +1,4 @@
+<div class="col-sm-12 p0 search-container">
 <div id="search-section">
   <div class="container">
     <div class="search-section mt">
@@ -13,8 +14,8 @@
             <div class="tab-view">
               <ul class="list-inline">
                 <li class="grid-view-tab"><i class="fa fa-th-large" aria-hidden="true"></i></li>
-                <li class="small-view-tab active"><i class="fa fa-th" aria-hidden="true"></i></li>
-                <li class="list-view-tab"><i class="fa fa-th-list" aria-hidden="true"></i></li>
+                <li class="small-view-tab "><i class="fa fa-th" aria-hidden="true"></i></li>
+                <li class="list-view-tab active"><i class="fa fa-th-list" aria-hidden="true"></i></li>
               </ul>
             </div>
             <div class="category-tab">
@@ -25,7 +26,7 @@
               </ul>
               <!-- Tab panes -->
 
-              <div class="tab-content small-view-tab">
+              <div class="tab-content search-tab list-view-tab">
                 <div role="tabpanel" class="tab-pane active" id="recent">
                   <ul>
                     <% @job_search_results.each do |job|%>
