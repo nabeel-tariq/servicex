@@ -78,7 +78,8 @@ class JobsController < ApplicationController
       search_results = Job.left_joins(options[:joins]).joins(options[:attachment_joins]).where(options[:conditions]).where(options[:raw_conditions])
     end
 
-    @job_search_results = search_results.compact.uniq
+    @job_search_results = Kaminari.paginate_array(search_results).page(params[:page]).per(10)
+
   end
 
   private
