@@ -56,7 +56,7 @@
                         <li>
                           <%if current_user.is_employer %>
                               <%= link_to('Profile', url_mapping(current_user), :style=>'color:black;') %>
-                              <%= link_to('Job Biddings', employers_path, :style=>'color:black;') %>
+                              <%= link_to('Job Biddings', jobs_path, :style=>'color:black;') %>
                           <%else%>
                               <%= link_to('Profile', url_mapping(current_user), :style=>'color:black;') %>
                           <%end%>

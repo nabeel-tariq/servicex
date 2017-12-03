@@ -24,6 +24,7 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
+    debugger
     @order = Order.new(order_params)
 
     respond_to do |format|
@@ -69,6 +70,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:contractor_id, :job_id, :bidding_id, :status_id)
+      params.require(:order).permit(:job_id, :bidding_id, :status_id)
     end
 end

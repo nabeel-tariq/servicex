@@ -1,0 +1,48 @@
+<% unless smart_listing.empty? %>
+    <table class="table table-striped">
+      <thead>
+      <th class="col-md-2">
+        <%= smart_listing.sortable "Job Name", :name %>
+      </th>
+      <th class="col-md-2">
+        <%= smart_listing.sortable "Description", :description %>
+      </th>
+      <th class="col-md-2">
+        <%= smart_listing.sortable "Amount", :budget %>
+      </th>
+      <th class="col-md-2">
+        <%= "No of Bids" %>
+      </th>
+      <th class="col-md-2">
+        <%= "Bidders Amount" %>
+      </th>
+      </thead>
+      <tbody>
+      <% smart_listing.collection.each do |job| %>
+          <tr>
+            <td><%= job.name %></td>
+            <td><%= job.description %></td>
+            <td><%= job.budget %></td>
+            <td><%= job.biddings.length %></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <% if job.biddings.length > 0 %>
+            <% job.biddings.each do |bid| %>
+                <td><%= bid.amount %></td>
+                <td><%= link_to 'Accept', Order.new(job_id:job.id, bidding_id: bid.id), method: 'post' %></td>
+              <% end %>
+            <% end %>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <% # Render nice pagination links fitted for Bootstrap 3 by default %>
+    <%= smart_listing.paginate %>
+    <%= smart_listing.pagination_per_page_links %>
+<% else %>
+    <p class="warning">No records!</p>
+<% end %>

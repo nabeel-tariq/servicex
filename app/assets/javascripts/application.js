@@ -24,6 +24,7 @@
 //= require owl.carousel.min
 //= require parsley
 //= require jquery.datetimepicker
+//= require smart_listing
 
 $(document).ready(function() {
     // google.maps.event.addDomListener(window, 'load', initialize);

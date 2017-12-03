@@ -1,11 +1,13 @@
 class JobsController < ApplicationController
   before_action :set_job, only: [:show, :edit, :update, :destroy]
   before_action :set_employer, except: [:search_jobs]
-
+  include SmartListing::Helper::ControllerExtensions
+  helper  SmartListing::Helper
   # GET /jobs
   # GET /jobs.json
   def index
-    @jobs = Job.all
+    #@jobs = Job.all
+    smart_listing_create :jobs, current_user.employer.jobs, partial: "partials/bidding_job_listing"
   end
 
   # GET /jobs/1

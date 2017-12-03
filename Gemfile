@@ -38,6 +38,8 @@ gem "parsley-rails"
 gem 'jquery-datetimepicker-rails'
 gem 'pg_search'
 gem 'kaminari'
+gem "smart_listing"
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
