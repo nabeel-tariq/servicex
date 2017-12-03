@@ -1,4 +1,4 @@
-<% model = current_user.contractor.biddings.length > 0 ? current_user.contractor.biddings.where(job_id: @job.id).first : Bidding.new %>
+<% model = bidding_handler current_user, @job %>
 <div class="contact-seller widget">
   <h4>Bidding Listing</h4>
   <% @job.biddings.each_with_index do |bidding, index| %>

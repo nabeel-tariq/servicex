@@ -29,4 +29,8 @@ class Contractor < ApplicationRecord
     self.contractor_services.build
     self.contractor_services.map &:initialize_nested
   end
+
+  def job_biddings job = nil
+    self.biddings.where(job_id: job.id)
+  end
 end
