@@ -86,6 +86,31 @@
                   </div>
                 </div>
               </div>
+
+              <% if @job.biddings.length > 0 %>
+                  <div class="contact-seller widget">
+                    <h4>Bidding Listing</h4>
+                    <% @job.biddings.each_with_index do |bidding, index| %>
+                        <div class="row">
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              Bid No: <%= index + 1 %>
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              Amount <%= bidding.amount %>
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              Description <%= bidding.description %>
+                            </div>
+                          </div>
+                        </div>
+                    <% end %>
+                  </div>
+              <% end %>
               <% if current_user && current_user.is_employer == false %>
                 <%= render 'partials/bidding_form' %>
               <% end %>

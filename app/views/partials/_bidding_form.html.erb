@@ -1,27 +1,5 @@
 <% model = bidding_handler current_user, @job %>
 <div class="contact-seller widget">
-  <h4>Bidding Listing</h4>
-  <% @job.biddings.each_with_index do |bidding, index| %>
-      <div class="row">
-        <div class="col-md-4">
-          <div class="form-group">
-            Bid No: <%= index + 1 %>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-            Amount <%= bidding.amount %>
-          </div>
-          </div>
-        <div class="col-md-4">
-          <div class="form-group">
-            Description <%= bidding.description %>
-          </div>
-        </div>
-      </div>
-  <% end %>
-</div>
-<div class="contact-seller widget">
   <h4>Make a Bid</h4>
   <%= form_for model,:html => { "data-parsley-validate" => true , class:"contact-form"} do |f| %>
       <%=f.hidden_field 'contractor_ids][', value: current_user.contractor.id %>
