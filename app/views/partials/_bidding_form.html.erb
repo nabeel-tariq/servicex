@@ -1,0 +1,45 @@
+<% model = current_user.contractor.biddings.length > 0 ? current_user.contractor.biddings.where(job_id: @job.id).first : Bidding.new %>
+<div class="contact-seller widget">
+  <h4>Bidding Listing</h4>
+  <% @job.biddings.each_with_index do |bidding, index| %>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            Bid No: <%= index + 1 %>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            Amount <%= bidding.amount %>
+          </div>
+          </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            Description <%= bidding.description %>
+          </div>
+        </div>
+      </div>
+  <% end %>
+</div>
+<div class="contact-seller widget">
+  <h4>Make a Bid</h4>
+  <%= form_for model,:html => { "data-parsley-validate" => true , class:"contact-form"} do |f| %>
+      <%=f.hidden_field 'contractor_ids][', value: current_user.contractor.id %>
+      <%=f.hidden_field 'job_id', value: @job.id %>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <%= f.text_field :description, autofocus: true , :class => 'form-control', 'data-parsley-pattern': "/^[a-zA-Z]+$/" ,'data-parsley-required': "true",'data-parsley-trigger': "change", placeholder: "Description"%>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <%= f.text_field :amount, autofocus: true , :class => 'form-control', 'data-parsley-required': "true",'data-parsley-trigger': "change", placeholder: "Amount"%>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.submit "Bidding" , :class => 'btn btn-primary'%>
+      </div>
+  <%end %>
+</div>

@@ -7,7 +7,7 @@ class Bidding < ApplicationRecord
 
   has_one :order, dependent: :destroy
 
-  validates_presence_of :job_id, :description, :amount, :time
+  validates_presence_of :job_id, :description, :amount
 
   accepts_nested_attributes_for :attachments
 end

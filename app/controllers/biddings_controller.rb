@@ -27,8 +27,8 @@ class BiddingsController < ApplicationController
     @bidding = Bidding.new(bidding_params)
 
     respond_to do |format|
-      if @bidding.save
-        format.html { redirect_to @bidding, notice: 'Bidding was successfully created.' }
+      if @bidding.save!
+        format.html { redirect_to :back, notice: 'Bidding was successfully created.' }
         format.json { render :show, status: :created, location: @bidding }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class BiddingsController < ApplicationController
   def update
     respond_to do |format|
       if @bidding.update(bidding_params)
-        format.html { redirect_to @bidding, notice: 'Bidding was successfully updated.' }
+        format.html { redirect_to :back, notice: 'Bidding was successfully updated.' }
         format.json { render :show, status: :ok, location: @bidding }
       else
         format.html { render :edit }
@@ -69,6 +69,6 @@ class BiddingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bidding_params
-      params.require(:bidding).permit(:job_id, :contractor_service_id)
+      params.require(:bidding).permit(:description, :amount,:job_id, contractor_ids: [])
     end
 end
