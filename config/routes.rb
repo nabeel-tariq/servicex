@@ -21,5 +21,11 @@ Rails.application.routes.draw do
   resources :contractors
   resources :contractor_services
   resources :employers
+  resources :conversations, only: [:index, :show, :destroy] do
+    member do
+      post :reply
+    end
+  end
+  resources :messages, only: [:new, :create]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

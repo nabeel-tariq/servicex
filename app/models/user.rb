@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_many :authentications
   enum account_stage: {incomplete: 0, complete: 1}
   after_create :handle_profileables
+  alias_attribute :name, :full_name
+  acts_as_messageable
 
   def handle_profileables
     employer = Employer.create(first_name: self.first_name, last_name: self.last_name)

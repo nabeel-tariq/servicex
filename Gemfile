@@ -39,6 +39,7 @@ gem 'jquery-datetimepicker-rails'
 gem 'pg_search'
 gem 'kaminari'
 gem "smart_listing"
+gem "mailboxer"
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
