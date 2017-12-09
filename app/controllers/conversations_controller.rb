@@ -5,9 +5,12 @@ class ConversationsController < ApplicationController
 
   def index
     @conversations = @mailbox.conversations
+    @user = User.find_by_id params[:id]
   end
 
   def show
+    @conversations = @mailbox.conversations
+    @user = User.find_by_id params[:id]
   end
 
   def reply

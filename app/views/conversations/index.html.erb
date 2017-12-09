@@ -12,11 +12,22 @@
       </div>
       <div id="contacts">
         <ul>
+          <%if @user%>
+              <li class="contact">
+                <div class="wrap">
+                  <%= image_tag @user.contractor.latest_image %>
+                  <div class="meta">
+                    <p><%= link_to @user.full_name, "javascript:", class: "name" %></p>
+                    <p class="preview">Send Message</p>
+                  </div>
+                </div>
+              </li>
+          <% end %>
           <% @conversations.each do |conversation|%>
               <% secondary_user = conversation.participants.reject{ |user| user.id == current_user.id }.first %>
               <li class="contact">
                 <div class="wrap">
-                  <%= image_tag secondary_user.contractor.latest_image %>
+                  <%#= image_tag secondary_user.contractor.latest_image %>
                   <div class="meta">
                     <p><%= link_to conversation.subject, conversation_path(conversation), class: "name" %></p>
                     <p class="preview"><%= conversation.last_message.body %></p>
