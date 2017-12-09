@@ -10,4 +10,8 @@ class Bidding < ApplicationRecord
   validates_presence_of :job_id, :description, :amount
 
   accepts_nested_attributes_for :attachments
+
+  def bid_owner
+    self.contractors.first
+  end
 end

@@ -30,4 +30,8 @@ module ApplicationHelper
   def setup_job_model job
     job.initialize_nested_attributes
   end
+
+  def bidding_allowed user,job
+    user && user.is_employer == false && user.employer.id != job.employer_id
+  end
 end

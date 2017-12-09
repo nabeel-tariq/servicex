@@ -58,13 +58,59 @@
                 </div><!-- item-info -->
               </div>
             </div><!-- item -->
+            <% if @job.biddings.length > 0 %>
+                <div class="all-categories section">
+                  <div class="container">
+                    <div class="col-md-12 col-sm-12">
+                      <div class="category-adds">
+                        <div id="category-tab">
+                          <div class="category-tab">
+                            <div class="tab-content search-tab list-view-tab">
+                              <div>
+                                <ul>
+                                  <% @job.biddings.each_with_index do |bidding, index|%>
+                                      <%= link_to(bidding.contractors.first, target: '_blank') do %>
+                                          <li class="item-wrap">
+                                            <div class="item">
+                                              <div class="item-image">
+                                                <%= image_tag bidding.contractors.first.latest_image, class: "img-responsive" %>
+                                                <div class="item-price">
+                                                  <span><%= bidding.amount %></span>
+                                                </div>
+                                              </div>
+                                              <div class="item-description">
+                                                <div class="item-meta">
+                                                  <span><%= bidding.bid_owner.first_name %> <%= bidding.bid_owner.last_name %></span>
+                                                  <ul class="list-inline product-social">
+                                                    <li><a href="#" class="pr-xl pt-lg"><i class="fa fa-comments" aria-hidden="true"></i> Message</a></li>
+                                                  </ul>
+                                                </div>
+                                                <div class="item-info">
+                                                  <span>Amount: <%= bidding.amount %> Rs.</span>
+                                                </div>
+                                                <div class="item-info">
+                                                  <span>Description: <%= bidding.description %></span>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </li>
+                                      <% end %>
+                                  <% end %>
+                                </ul>
+                              </div> <!--tab-pane-->
+                            </div>
+                          </div>
+                        </div><!-- category-tab-->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            <% end %>
             <div class="location-map">
               <h4>Seller Location</h4>
               <div id="gmap"></div>
             </div>
           </div>
-
-
           <div class="col-sm-5 col-md-4">
             <div class="side-bar">
               <div class="item-author widget">
@@ -86,39 +132,14 @@
                   </div>
                 </div>
               </div>
-
-              <% if @job.biddings.length > 0 %>
-                  <div class="contact-seller widget">
-                    <h4>Bidding Listing</h4>
-                    <% @job.biddings.each_with_index do |bidding, index| %>
-                        <div class="row">
-                          <div class="col-md-4">
-                            <div class="form-group">
-                              Bid No: <%= index + 1 %>
-                            </div>
-                          </div>
-                          <div class="col-md-4">
-                            <div class="form-group">
-                              Amount <%= bidding.amount %>
-                            </div>
-                          </div>
-                          <div class="col-md-4">
-                            <div class="form-group">
-                              Description <%= bidding.description %>
-                            </div>
-                          </div>
-                        </div>
-                    <% end %>
-                  </div>
-              <% end %>
-              <% if current_user && current_user.is_employer == false %>
+              <% if bidding_allowed current_user, @job %>
                 <%= render 'partials/bidding_form' %>
               <% end %>
-            </div><!-- side-bar -->
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div> <!-- all-categories -->
-</div>	<!-- page -->
+  </div>
+</div>
 </body>

@@ -17,7 +17,9 @@ $margin-xxl:   60px;
 $margin-full:   80px;
 $margin-xfull:   167px;
 
+
 $padding-xl:   30px;
+$padding-md:   20px;
 $padding-xxl:   60px;
 $padding-lg:   15px;
 $padding-base: 10px;
@@ -102,6 +104,12 @@ $padding-sm:   5px;
 .pr-lg { padding-right: $padding-lg !important; }
 .pt-lg { padding-top: $padding-lg !important; }
 .pb-lg { padding-bottom: $padding-lg !important; }
+
+.p-md  { padding: $padding-md !important; }
+.pl-md { padding-left: $padding-md !important; }
+.pr-md { padding-right: $padding-md !important; }
+.pt-md { padding-top: $padding-md !important; }
+.pb-md { padding-bottom: $padding-md !important; }
 
 .p-xl  { padding: $padding-xl !important; }
 .pl-xl { padding-left: $padding-xl !important; }

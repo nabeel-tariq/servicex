@@ -7,7 +7,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="form-group">
-            <%= f.text_field :description, autofocus: true , :class => 'form-control', 'data-parsley-pattern': "/^[a-zA-Z]+$/" ,'data-parsley-required': "true",'data-parsley-trigger': "change", placeholder: "Description"%>
+            <%= f.text_area :description, autofocus: true , :class => 'form-control', 'data-parsley-pattern': "/^[a-zA-Z\s]*$/" ,'data-parsley-required': "true",'data-parsley-trigger': "change", placeholder: "Description"%>
           </div>
         </div>
         <div class="col-md-12">
