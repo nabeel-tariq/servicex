@@ -1,0 +1,12 @@
+<% @conversations.each do |conversation|%>
+    <% secondary_user = conversation.participants.reject{ |user| user.id == current_user.id }.first %>
+    <li class="contact">
+      <div class="wrap">
+        <%= image_tag secondary_user.contractor.latest_image %>
+        <div class="meta">
+          <p><%= link_to secondary_user.full_name, conversation_path(conversation), class: "name" %></p>
+          <p class="preview"><%= conversation.last_message.body %></p>
+        </div>
+      </div>
+    </li>
+<% end %>

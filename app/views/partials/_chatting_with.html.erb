@@ -1,0 +1,3 @@
+<% second_user = (@conversation && @conversation.participants.reject{ |user| user.id == current_user.id }.first) || @user || current_user %>
+<%= image_tag second_user.employer.latest_image, class: "online" %>
+<p><%= second_user.full_name %></p>

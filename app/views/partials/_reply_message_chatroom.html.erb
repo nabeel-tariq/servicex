@@ -1,0 +1,6 @@
+<%= form_tag reply_conversation_path(@conversation), method: :post do %>
+    <%= text_field_tag :body,params[:body], class: "bodytext", placeholder: "Write a message..." %>
+    <%= button_tag 'submit', class: "submit" do %>
+        <i class="fa fa-paper-plane" aria-hidden="true"></i>
+    <% end %>
+<% end %>

@@ -12,7 +12,7 @@
       </div>
       <div id="contacts">
         <ul>
-          <%if @user%>
+          <% if @user %>
               <li class="contact">
                 <div class="wrap">
                   <%= image_tag @user.contractor.latest_image %>
@@ -23,67 +23,20 @@
                 </div>
               </li>
           <% end %>
-          <% @conversations.each do |conversation|%>
-              <% secondary_user = conversation.participants.reject{ |user| user.id == current_user.id }.first %>
-              <li class="contact">
-                <div class="wrap">
-                  <%#= image_tag secondary_user.contractor.latest_image %>
-                  <div class="meta">
-                    <p><%= link_to conversation.subject, conversation_path(conversation), class: "name" %></p>
-                    <p class="preview"><%= conversation.last_message.body %></p>
-                  </div>
-                </div>
-              </li>
-          <% end %>
-        </ul>
+          <%= render 'partials/chatroom_users_listing', locale: { conversations: @conversations } %>
+         </ul>
       </div>
     </div>
     <div class="content">
       <div class="contact-profile">
-        <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-        <p>Harvey Specter</p>
+        <%= render 'partials/chatting_with', locale: { conversation: @conversation } %>
       </div>
       <div class="messages">
-        <ul>
-          <li class="sent">
-            <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-            <p>How the hell am I supposed to get a jury to believe you when I am not even sure that I do?!</p>
-          </li>
-          <li class="replies">
-            <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-            <p>When you're backed against the wall, break the god damn thing down.</p>
-          </li>
-          <li class="replies">
-            <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-            <p>Excuses don't win championships.</p>
-          </li>
-          <li class="sent">
-            <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-            <p>Oh yeah, did Michael Jordan tell you that?</p>
-          </li>
-          <li class="replies">
-            <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-            <p>No, I told him that.</p>
-          </li>
-          <li class="replies">
-            <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-            <p>What are your choices when someone puts a gun to your head?</p>
-          </li>
-          <li class="sent">
-            <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-            <p>What are you talking about? You do what they say or they shoot you.</p>
-          </li>
-          <li class="replies">
-            <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-            <p>Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p>
-          </li>
-        </ul>
+        <%= render 'partials/chat_messages', locale: { conversation: @conversation } %>
       </div>
       <div class="message-input">
         <div class="wrap">
-          <input type="text" placeholder="Write your message..." />
-          <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
-          <button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+          <%= render 'partials/new_chatroom', locale: { conversation: @conversation }%>
         </div>
       </div>
     </div>
@@ -124,12 +77,12 @@
   });
 
   function newMessage() {
-      message = $(".message-input input").val();
+      message = $(".bodytext").val();
       if($.trim(message) == '') {
           return false;
       }
       $('<li class="sent"><img src="http://emilcarlsson.se/assets/mikeross.png" alt="" /><p>' + message + '</p></li>').appendTo($('.messages ul'));
-      $('.message-input input').val(null);
+//      $('.bodytext').val(null);
       $('.contact.active .preview').html('<span>You: </span>' + message);
       $(".messages").animate({ scrollTop: $(document).height() }, "fast");
   };
@@ -146,12 +99,7 @@
   });
   //# sourceURL=pen.js
   </script>
-
 </div>
-<ul class="list-group">
-  <p><%= link_to 'Start conversation', new_message_path, class: 'btn btn-lg btn-primary' %></p>
-  <%= render partial: 'partials/conversation', collection: @conversations %>
-</ul>
     <ul class="list-group"></ul>
 </div>
 </div>

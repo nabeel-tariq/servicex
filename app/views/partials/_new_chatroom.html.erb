@@ -1,0 +1,7 @@
+<%= form_tag messages_path, method: :post do %>
+    <%= text_field_tag 'message[body]',nil, class: "bodytext", placeholder: "Write a message..." %>
+    <%= hidden_field_tag :recipients, params[:id] %>
+    <%= button_tag 'submit', class: "submit" do %>
+        <i class="fa fa-paper-plane" aria-hidden="true"></i>
+    <% end %>
+<% end %>

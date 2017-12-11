@@ -34,4 +34,17 @@ module ApplicationHelper
   def bidding_allowed user,job
     user && user.is_employer == false && user.employer.id != job.employer_id
   end
+
+  def chat_url user, contractor_user
+    @conversation = Mailboxer::Conversation.participant(user).participant(contractor_user)
+    url = @conversation.length > 0 ? conversation_path(@conversation.first) : conversations_path(id:contractor_user.id)
+    url
+  end
+
+  def owner_chat_url user, contractor_user
+    @conversation = Mailboxer::Conversation.participant(contractor_user).participant(user)
+    url = @conversation.length > 0 ? conversation_path(@conversation.first) : conversations_path(id:contractor_user.id)
+    url
+  end
+
 end

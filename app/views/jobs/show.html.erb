@@ -81,9 +81,16 @@
                                               <div class="item-description">
                                                 <div class="item-meta">
                                                   <span><%= bidding.bid_owner.first_name %> <%= bidding.bid_owner.last_name %></span>
-                                                  <ul class="list-inline product-social">
-                                                    <li><a href="#" class="pr-xl pt-lg"><i class="fa fa-comments" aria-hidden="true"></i> Message</a></li>
-                                                  </ul>
+                                                  <% if current_user.id == @job.employer.user.id %>
+                                                      <ul class="list-inline product-social">
+                                                        <% url = chat_url current_user, bidding.contractors.first.user %>
+                                                        <%= link_to(url, target: '_blank', class: "pr-xl pt-lg") do %>
+                                                            <li>
+                                                              <i class="fa fa-comments" aria-hidden="true"></i> Message
+                                                            </li>
+                                                        <% end %>
+                                                      </ul>
+                                                  <% end %>
                                                 </div>
                                                 <div class="item-info">
                                                   <span>Amount: <%= bidding.amount %> Rs.</span>
@@ -128,6 +135,12 @@
                         <span>Address:</span> <%= @job.employer.address %>
                       </address>
                       <p><span>Phone :</span> <%= @job.employer.get_contact_numbers.first.try(:text_value) %> </p>
+                      <% if current_user.id != @job.employer.user.id %>
+                          <% url = owner_chat_url current_user, @job.employer.user %>
+                          <%= link_to(url, target: '_blank', class: "pr-xl pt-lg") do %>
+                              <p><span>Message :</span> <i class="fa fa-comments" aria-hidden="true"></i> </p>
+                          <% end %>
+                      <% end %>
                     </div>
                   </div>
                 </div>
