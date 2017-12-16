@@ -17,7 +17,6 @@
 /test/*
 # Ignore Byebug command history file.
 .byebug_history
-config/database.yml
 /.idea
 public/system/*
 README.md

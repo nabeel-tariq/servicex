@@ -1,0 +1,19 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: serviceX_development
+  pool: 5
+  username: pixelbytes
+  password:
+
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: serviceX_test
+  pool: 5
+  username: pguser
+  password: nabeel
+
+production:
+  url: ENV['DATABASE_URL']
