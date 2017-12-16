@@ -50,7 +50,7 @@ RailsAdmin.config do |config|
       field :email
       field :is_active do
         visible do
-          bindings[:view]._current_user.id != bindings[:view]._current_user.id
+          bindings[:view]._current_user.id != bindings[:object].id
         end
       end
     end
