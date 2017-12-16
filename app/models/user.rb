@@ -39,4 +39,8 @@ class User < ApplicationRecord
       return []
     end
   end
+
+  def is_admin?
+    self.email == "admin@servicex.com" ? true : false
+  end
 end
