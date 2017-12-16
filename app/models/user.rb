@@ -40,7 +40,7 @@ class User < ApplicationRecord
     end
   end
 
-  def is_admin?
-    self.email == "admin@servicex.com" ? true : false
+  def active_for_authentication?
+    super && self.is_active?
   end
 end

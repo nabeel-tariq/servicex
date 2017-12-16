@@ -1,4 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
+  include Accessible
   def new
     super
   end

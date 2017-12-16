@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
+  devise_for :admins, :controllers => { :sessions => 'admins/sessions'
+  }
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+
   root 'home#index'
   devise_for :users, :controllers => { :registrations => 'registrations',
                                        omniauth_callbacks: 'users/omniauth'
   }
+
+
   post '/auth/:provider/callback' => 'authentications#create'
   resources :users do
     collection do
