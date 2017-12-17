@@ -270,7 +270,32 @@ RailsAdmin.config do |config|
     end
   end
 
-  config.included_models = %w[ User Employer Contractor Job ContactNumber Bidding Order Service ServiceType City State Payment Admin Location ServiceCategory State Technician]
+  config.model 'Question' do
+    list do
+      field :id
+      field :title
+      field :name
+      field :question_type
+      field :description
+      field :answers
+      field :status
+    end
+    edit do
+      field :title
+      field :name
+      field :question_type
+      field :description
+      field :answers, :text do
+        formatted_value do
+          bindings[:object].values&.join("\r\n") || ""
+        end
+      end
+      field :status
+      field :services
+    end
+  end
+
+  config.included_models = %w[ Question User Employer Contractor Job ContactNumber Bidding Order Service ServiceType City State Payment Admin Location ServiceCategory State Technician]
   config.actions do
     dashboard                     # mandatory
     index                         # mandatory

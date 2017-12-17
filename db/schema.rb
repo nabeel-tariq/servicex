@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171216124544) do
+ActiveRecord::Schema.define(version: 20171217103118) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -251,6 +251,26 @@ ActiveRecord::Schema.define(version: 20171216124544) do
     t.index ["order_id"], name: "index_payments_on_order_id", using: :btree
   end
 
+  create_table "question_services", force: :cascade do |t|
+    t.integer  "service_id"
+    t.integer  "question_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["question_id"], name: "index_question_services_on_question_id", using: :btree
+    t.index ["service_id"], name: "index_question_services_on_service_id", using: :btree
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.string   "title"
+    t.string   "name"
+    t.integer  "question_type"
+    t.string   "description"
+    t.jsonb    "values"
+    t.integer  "status"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
   create_table "service_categories", force: :cascade do |t|
     t.string   "category_name"
     t.string   "status"
@@ -346,6 +366,8 @@ ActiveRecord::Schema.define(version: 20171216124544) do
   add_foreign_key "orders", "biddings"
   add_foreign_key "orders", "jobs"
   add_foreign_key "payments", "orders"
+  add_foreign_key "question_services", "questions"
+  add_foreign_key "question_services", "services"
   add_foreign_key "services", "service_categories"
   add_foreign_key "technician_orders", "orders"
   add_foreign_key "technician_orders", "technicians"
