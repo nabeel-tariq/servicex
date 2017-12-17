@@ -274,7 +274,6 @@ RailsAdmin.config do |config|
     list do
       field :id
       field :title
-      field :name
       field :question_type
       field :description
       field :answers
@@ -282,7 +281,6 @@ RailsAdmin.config do |config|
     end
     edit do
       field :title
-      field :name
       field :question_type
       field :description
       field :answers, :text do

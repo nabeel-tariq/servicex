@@ -8,6 +8,7 @@ class Question < ApplicationRecord
 
 
   before_validation :set_defaults
+  validates_presence_of :title, :question_type
 
   private
 
