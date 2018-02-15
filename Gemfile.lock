@@ -168,9 +168,6 @@ GEM
       mimemagic (~> 0.3.0)
     parsley-rails (2.7.0.0)
       railties (>= 3.0.0)
-    passenger (5.0.30)
-      rack
-      rake (>= 0.8.1)
     pg (0.21.0)
     pg_search (2.1.1)
       activerecord (>= 4.2)
@@ -300,7 +297,6 @@ DEPENDENCIES
   omniauth-google-oauth2 (~> 0.4.1)
   paperclip (~> 5.0.0)
   parsley-rails
-  passenger
   pg (~> 0.18)
   pg_search
   puma (~> 3.0)
